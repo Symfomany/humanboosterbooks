@@ -139,6 +139,38 @@ app.get('/extras-example', async(req, res) => {
 })
 
 
+app.post('/product/:pid/comment/add', async(req,res) => {
+
+  try {
+    let product = await Product.findByPk(req.params.pid)
+    // let comment = new Comment()
+    // comment.content = req.body.content
+    // comment.readed = 0
+    // comment.user_id = 2
+    // comment.setProduct(product)
+
+    // await comment.save()
+
+    await Comment.findOrCreate({
+      where: { content: req.body.content },
+       defaults: {
+       content: req.body.content,
+       user_id: 2,
+       product_id: product.id,
+       readed: 0
+      }
+    })
+
+   res.json(product)
+  } catch (error) {
+    res.status(403).send(error.message)
+  }
+
+
+})
+
+
+
 app.get('/avgcart/:uid', async(req,res) => {
 
   try {

@@ -13,6 +13,13 @@ Comment.init({
     content: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          is: {
+           args: /^[0-9a-z ]{3,200}$/i,
+           msg: "le commentaire est trop court"
+          }
+         
+        }
     },
     readed: {
         type: DataTypes.BOOLEAN,
