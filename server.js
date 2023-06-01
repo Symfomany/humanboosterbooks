@@ -17,6 +17,8 @@ const Product = require('./models/product');
 const Tag = require('./models/tag');
 const Cart = require('./models/cart');
 const Comment = require('./models/comment');
+const User = require('./models/user');
+const Commande = require('./models/commande');
 
 app.get('/', (req, res) => {
   res.json('Hello Humman Booster Students!')
@@ -48,15 +50,6 @@ app.get('/user', (req, res) => {
 })
 
 
-const User = sequelize.define("user", {
-  nom: DataTypes.STRING(60),
-  prenom: DataTypes.STRING(60),
-  email: DataTypes.STRING(60),
-  age: DataTypes.INTEGER
-}, {
-    freezeTableName: true,
-    timestamps: false
-});
 
 
 app.get('/users', async(req, res) => {
@@ -124,6 +117,132 @@ app.get('/extras-example', async(req, res) => {
       let extra = await product.getExtra()
       res.json(extra)
 
+  } catch (error) {
+      console.log(error,"error");
+  }
+ 
+})
+
+
+
+app.get('/extras-example', async(req, res) => {
+  try {
+      const product = await Product.findByPk(1)
+
+      let extra = await product.getExtra()
+      res.json(extra)
+
+  } catch (error) {
+      console.log(error,"error");
+  }
+ 
+})
+
+
+app.get('/avgcart/:uid', async(req,res) => {
+
+  try {
+   let user = await User.findByPk(req.params.uid)
+  
+   let paniers= await user.getCarts()
+   res.json(paniers)
+
+
+
+  } catch (error) {
+     console.log("error", error);
+  }
+
+
+})
+
+
+app.get('/product/:pid/comments', async(req,res) => {
+
+  try {
+   let product = await Product.findByPk(req.params.pid)
+  
+   let comments= await product.getComments()
+
+    let comment = await Comment.findByPk(3)
+  
+   console.log(await comment.getProduct())
+
+   res.json(comments)
+  } catch (error) {
+     console.log("error", error);
+  }
+
+
+})
+
+
+app.get('/user/:uid/commande', async(req,res) => {
+
+  try {
+   let user = await User.findByPk(req.params.uid)
+  
+   let commandes= await user.getCommandes()
+
+   commandes = commandes.filter((commande) => commande.status == "1")
+
+   res.json(commandes)
+  } catch (error) {
+     console.log("error", error);
+  }
+
+
+})
+
+
+app.get('/user/:uid/cart', async(req,res) => {
+
+  try {
+   let user = await User.findByPk(req.params.uid)
+  
+   let paniers= await user.getCarts()
+   res.json(paniers)
+  } catch (error) {
+     console.log("error", error);
+  }
+
+
+})
+
+app.get('/avgproductprice', async(req,res) => {
+
+   const products = await Product.findAll ()
+
+   let moyenne = products.reduce((a,b) =>a.price + b.price) / products.length
+
+  // const avg = await Product.findOne (
+  //   {attributes: [
+  //    [sequelize.fn('AVG', sequelize.col('price')), 'moyenne_prix']
+  // ]})
+res.json(moyenne)
+})
+
+app.get('/tag-example', async(req, res) => {
+  try {
+      let product = await Product.findOne({
+        where: {
+          title: "Apple Mini"
+        }
+      })
+
+
+      let tag = await Tag.findOne({
+        where: {
+          title: "Sport"
+        }
+      })
+
+      let tags = await product.getTags()
+      let products = await tag.getProducts()
+
+
+      res.json(products)
+      
   } catch (error) {
       console.log(error,"error");
   }

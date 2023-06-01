@@ -5,6 +5,7 @@ const sequelize = new Sequelize('shop', 'root', null, {
     dialect: 'mysql'
   });
 const { DataTypes, Model } = require('sequelize');
+const Product = require('./product');
 
 class Tag extends Model { }
 

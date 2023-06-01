@@ -5,6 +5,7 @@ const sequelize = new Sequelize('shop', 'root', null, {
     dialect: 'mysql'
   });
 const { DataTypes, Model } = require('sequelize');
+const Product = require('./product');
 
 class Comment extends Model { }
 
@@ -33,6 +34,8 @@ Comment.init({
     freezeTableName: true,
     timestamps: false
   });
-
+  
+Comment.belongsTo(Product, { foreignKey: "product_id"});
+Product.hasMany(Comment, { foreignKey: "product_id"});
 
 module.exports = Comment;
