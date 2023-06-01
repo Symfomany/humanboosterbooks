@@ -161,6 +161,8 @@ app.post('/insert-comment', async(req, res) => {
 })
 
 
+
+
 app.post('/insert-extras', async(req, res) => {
   try {
       let product = await Product.findOne({
@@ -179,7 +181,7 @@ app.post('/insert-extras', async(req, res) => {
       extra.longueur = req.body.longueur
       extra.largeur =  req.body.largeur
       extra.poid =  req.body.poid
-      
+
       await extra.save()
 
       product.setExtra(extra)
