@@ -9,6 +9,9 @@ const sequelize = new Sequelize('shop', 'root', '', {
 });
 
 class Product extends Model {
+    test(){
+        console.log(`test`)
+    }
  }
 
 Product.init({
