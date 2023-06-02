@@ -124,6 +124,19 @@ app.get('/extras-example', async(req, res) => {
 })
 
 
+app.get('/product-example', async(req, res) => {
+  try {
+      const products = await Product.findAll({
+        include: Comment 
+      })
+      
+      res.json(products)
+
+  } catch (error) {
+      console.log(error,"error");
+  }
+ 
+})
 
 app.get('/extras-example', async(req, res) => {
   try {
@@ -169,6 +182,29 @@ app.post('/product/:pid/comment/add', async(req,res) => {
 
 })
 
+app.delete('/product/delete', async(req,res) => {
+
+  try {
+    let title = req.body.title
+    const product = await Product.findOne({ title });
+    console.log(product, "product");
+
+    await product.destroy();
+
+    // await Product.destroy({
+    //   where: {
+    //     title
+    //   },
+    //   // force: true
+    // });
+
+    res.json(true)
+  } catch (error) {
+     console.log("error", error);
+  }
+
+
+})
 
 
 app.get('/avgcart/:uid', async(req,res) => {

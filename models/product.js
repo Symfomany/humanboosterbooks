@@ -30,10 +30,11 @@ Product.init({
 
 }, {
     sequelize,
+    paranoid: true,
     tableName: 'product',
     modelName: 'Product',
     freezeTableName: true,
-    timestamps: false
+    timestamps: true
 });
 
 Product.belongsToMany(Tag, { through: 'product_tag',  foreignKey: "product_id"  })
