@@ -19,6 +19,21 @@ const Cart = require('./models/cart');
 const Comment = require('./models/comment');
 const User = require('./models/user');
 const Commande = require('./models/commande');
+const mongoose = require('mongoose');
+const Notification = require('./models/notification');
+
+const main = async () =>{
+  try {
+    await mongoose.connect('mongodb://127.0.0.1:27017/shop')
+     console.log("Connexion MongoDB etablie");
+
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
+main()
+
 
 app.get('/', (req, res) => {
   res.json('Hello Humman Booster Students!')
@@ -35,6 +50,38 @@ app.get('/products/last', async (req, res) => {
             raw: true,
         });
         res.json(products);
+    } catch (error) {
+              console.log(Product)
+
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+
+app.get('/notifications', async (req, res) => {
+    try {
+      
+      let notifications = await  Notification.find({})
+      res.json(notifications);
+    } catch (error) {
+              console.log(Product)
+
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+
+app.post('/notifications', async (req, res) => {
+    try {
+      
+      let notifications = new  Notification()
+      notifications.title ="Nouveau"
+      notifications.created = new Date()
+      await notifications.save()
+
+      res.json(notifications);
     } catch (error) {
               console.log(Product)
 
@@ -108,6 +155,25 @@ app.get('/tags', async(req, res) => {
 
 })
 
+
+app.get('/product/:pid/addtag', async (req, res) => {
+  try {
+    await sequelize.sync();
+    const product = await Product.findByPk(req.params.pid);
+
+    const tagOne = await Tag.findByPk(2);
+    const tagTwo = await Tag.findByPk(3);
+     await product.addTag(tagOne)
+     await product.addTag(tagTwo)
+
+    res.json(true);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des utilisateurs.' });
+  }
+});
+
+
 app.get('/users/commande', async (req, res) => {
   try {
     const users = await User.findAll({
@@ -160,10 +226,14 @@ app.post('/product/tag', async(req, res) => {
 
 
 
-app.get('/product-example', async(req, res) => {
+app.post('/product-example', async(req, res) => {
   try {
+        await sequelize.sync();
       const products = await Product.findAll({
-        include: Comment 
+        include: {
+           model: Tag,
+           where: { title: { [Op.eq]: req.body.title } },
+        }
       })
       
       res.json(products)
@@ -173,6 +243,33 @@ app.get('/product-example', async(req, res) => {
   }
  
 })
+
+
+app.get('/product-with-comment', async(req, res) => {
+  try {
+      await sequelize.sync();
+      const products = await Product.create({
+        title: "Apple TV",
+        description: "la TV Apple",
+        price: 25,
+        comment: [
+          {content: "Super télé!"}
+        ]
+      
+      },
+      {
+        include: [Comment]
+      }
+      )
+      
+      res.json(true)
+
+  } catch (error) {
+      console.log(error,"error");
+  }
+ 
+})
+
 
 app.get('/extras-example', async(req, res) => {
   try {
