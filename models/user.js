@@ -28,7 +28,7 @@ User.init({
     modelName: 'User',
     tableName: 'user',
     freezeTableName: true,
-    timestamps: false
+    timestamps: true
   });
 
 // Cart.belongsTo(User)

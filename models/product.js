@@ -34,10 +34,10 @@ Product.init({
     tableName: 'product',
     modelName: 'Product',
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 });
 
-Product.belongsToMany(Tag, { through: 'product_tag',  foreignKey: "product_id"  })
-Tag.belongsToMany(Product, { through: 'product_tag', foreignKey: "tag_id" })
+Product.belongsToMany(Tag, { through: 'product_tag',  foreignKey: "product_id", targetKey: "id"  })
+Tag.belongsToMany(Product, { through: 'product_tag', foreignKey: "tag_id", targetKey: "id"  })
 
 module.exports = Product

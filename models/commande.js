@@ -34,7 +34,7 @@ Commande.init({
     modelName: 'Commande',
     tableName: 'commande',
     freezeTableName: true,
-    timestamps: false
+    timestamps: true
 });
 
 User.hasMany(Commande, { foreignKey: "user_id"});

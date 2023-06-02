@@ -17,10 +17,12 @@ Tag.init({
   
   }, {
     sequelize,
-    modelName: 'tag',
+    modelName: 'Tag',
     freezeTableName: true,
     timestamps: false
   });
+
+
 
 
 module.exports = Tag;

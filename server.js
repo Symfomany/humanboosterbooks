@@ -108,6 +108,25 @@ app.get('/tags', async(req, res) => {
 
 })
 
+app.get('/users/commande', async (req, res) => {
+  try {
+    const users = await User.findAll({
+      limit: 3,
+      order: [['createdAt', 'DESC']],
+      include: [{
+        model: Commande,
+        order: [['createdAt', 'DESC']],
+        limit: 1
+      }]
+    });
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des utilisateurs.' });
+  }
+});
+
 
 
 app.get('/extras-example', async(req, res) => {
@@ -122,6 +141,23 @@ app.get('/extras-example', async(req, res) => {
   }
  
 })
+
+
+
+app.post('/product/tag', async(req, res) => {
+  try {
+      const products = await User.findAll({
+         include: Commande
+      })
+      
+      res.json(products)
+
+  } catch (error) {
+      console.log(error,"error");
+  }
+ 
+})
+
 
 
 app.get('/product-example', async(req, res) => {
@@ -300,6 +336,7 @@ app.get('/tag-example', async(req, res) => {
 
 
       let tag = await Tag.findOne({
+        include: Product,
         where: {
           title: "Sport"
         }
