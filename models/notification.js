@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const Schema = mongoose.Schema;
 // creation de schéma
 const NotificationSchema = new Schema({
