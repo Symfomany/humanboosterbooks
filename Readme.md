@@ -1,22 +1,7 @@
+## Installer le project
 
-https://sequelize.org/docs/v6/advanced-association-concepts/eager-loading/
+npm i
 
-```
-const tasks = await Task.findAll({ include: User });
+## Installer nodemon en global
 
-or all elements
-const users = await User.findAll({ include: Task });
-
-User.findAll({
-  include: {
-    model: Tool,
-    as: 'Instruments'
-    where: {
-      size: {
-        [Op.ne]: 'small'
-      }
-    }
-  }
-});
-
-```
+npm i -g nodemon
