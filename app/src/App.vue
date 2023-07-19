@@ -1,35 +1,44 @@
 <template>
   <div id="app">
-    
+
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Boutique en ligne de Livres</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="#"><i class="fas fa-home"></i>  Accueil</a>
+              <a class="nav-link" href="#"><i class="fas fa-home"></i> Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-cogs"></i>  Les Livres</a>
+              <a class="nav-link" href="#"><i class="fas fa-book"></i> Les Livres</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-cogs"></i>  Les Auteurs/Editeurs</a>
+              <a class="nav-link" href="#"><i class="fas fa-at"></i> Les Auteurs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-cogs"></i>  Les Utilisateurs</a>
+              <a class="nav-link" href="#"><i class="fas fa-users"></i> Les Utilisateurs</a>
             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-comments"></i> Les Commentaires</a>
+              </li>
           </ul>
         </div>
       </nav>
     </header>
+
+    <nav>
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </nav>
     <main class="container" id="main">
-      <Home />
+       <router-view/>
     </main>
 
-     <!-- Footer -->
+    <!-- Footer -->
     <footer class="bg-dark text-light text-center py-3">
       <div class="container">
         <div class="row">
@@ -60,13 +69,9 @@
 </template>
 
 <script>
-import Home from './components/Home.vue'
 
 export default {
   name: 'App',
-  components: {
-    Home
-  }
 }
 </script>
 
@@ -78,7 +83,31 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-#main{
+
+#main {
   min-height: 800px;
+}
+</style>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

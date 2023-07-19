@@ -15,7 +15,6 @@
                     Chargement...
                   </div>
                     <p v-for="genre in genres" :key="genre.id"> {{  genre.name }}</p>
-
                 </p>
               </div>
             </div>
