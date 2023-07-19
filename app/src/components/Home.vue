@@ -123,6 +123,7 @@ export default {
       prenom: "Julien",
       addresses : [],
       links: [],
+      authors: [],
       compteur: 0
     }
   },
