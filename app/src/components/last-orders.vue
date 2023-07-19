@@ -3,7 +3,6 @@
     <h3>les dernières commandes</h3>
     <div v-if="orders.length" class="row">
       <div
-        v-if="orders.length"
         v-for="(order, index) in orders"
         :key="index"
         class="card col-md-6 col-lg-3"
