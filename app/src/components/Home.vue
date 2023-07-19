@@ -99,7 +99,8 @@
         </div>
       </div>
 
-      
+      <LastOrders></LastOrders>
+      <OrdersStats></OrdersStats>
       
     
     </div>
@@ -110,11 +111,15 @@
 <script>
 import axios from 'axios';
 import HumanBooster from './HumanBooster.vue'
+import LastOrders from './last-orders.vue'
+import OrdersStats from './orders-stats.vue';
 export default {
   name: 'Home',
   props: {},
   components: {
-    HumanBooster
+    HumanBooster,
+    LastOrders,
+    OrdersStats,
   },
   data(){
     return {
