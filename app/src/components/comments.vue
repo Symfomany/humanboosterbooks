@@ -6,7 +6,7 @@
             v-for="(comment, index) in comments"
             :key="index">
             <hr>
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col-6">
                 <b>Utilisateur : </b>{{ comment.firstname }} {{ comment.lastname }}<br />
                 </div>
@@ -14,12 +14,14 @@
                 <b>Livre :</b> {{ comment.title }} <br />
                 </div>
             </div>
-            <div>
+            <div class="mb-2">
             {{ comment.content }}
             </div>
+            <div>
             <b>Vues :</b>{{ comment.views }}<br />
             Créé le {{ comment.created_date }} <br />
             Mis à jour le {{ comment.updated_day_time }} <br />
+            </div>
         </div>
         </ul>
       </div>
