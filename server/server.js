@@ -53,7 +53,13 @@ app.get('/ma-video', async (req, res) => {
   return res.json(results[0])
 })
 
+// une route pour récupérer les livres
+app.get('/newbooks', async (req, res) => {
+const [results, metadata] = await sequelize.query
+("SELECT * FROM books WHERE visible = 1 ORDER BY books.publication_date DESC LIMIT 5");
 
+  return res.json(results)
+})
 
 
 app.post('/addresses', async (req, res) => {
