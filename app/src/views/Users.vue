@@ -32,9 +32,12 @@
             <button type="submit" @click="addUser" class="btn btn-primary">Submit</button>
         </form>
         </div>
-
-
-
+<!--boucle v-for pour afficher tous les utilisateurs et bouton supprimer-->
+        <div v-for="user in users" :key="user.id">
+          <p>{{ user.fname }} {{ user.lname }}</p>
+          <!-- Ajoutez un bouton pour supprimer l'utilisateur -->
+          <button @click="deleteUser(user.id)">Supprimer</button>
+        </div>
 
 
 
@@ -85,8 +88,17 @@
     this.email = ""
     this.pswd = ""
 
+    },
+  async deleteUser(userId) {
+    try {
+      await axios.delete(`http://localhost:3000/users/${userId}`);
+      // Mettre à jour la liste des utilisateurs localement pour refléter les changements côté serveur
+      this.users = this.users.filter(user => user.id !== userId);
+    } catch (error) {
+      console.error(error);
     }
-    }
+  }
+  }
 
 }
 
