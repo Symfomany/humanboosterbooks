@@ -67,9 +67,11 @@
     },
     data(){
       return {
-        users: []
+        users: [],
+        nombre_utilisateurs: [],
       }
     },
+  
 
 
 
@@ -97,9 +99,9 @@
     this.email = ""
     this.pswd = ""
 
-    }
-    }
-
+    },
+  
 }
+  }
 
 </script>
