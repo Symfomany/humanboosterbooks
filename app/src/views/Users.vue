@@ -180,14 +180,10 @@
     this.age = ""
     this.email = ""
     this.pswd = ""
-<<<<<<< HEAD
-    },
-=======
     this.dob = ""
     this.lang = ""
     this.phone = ""
->>>>>>> 64be05d49f33079a45abd502561981e1f383ac15
-
+  },
     
 
     async tableUsers() {
