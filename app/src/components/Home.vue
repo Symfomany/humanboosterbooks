@@ -88,6 +88,7 @@
           <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title">Modérer les Commentaires</h5>
+              <p>Nombre de commentaires : {{ commentCount.nbCount }}</p>
               <Comments></Comments>
             </div>
           </div>
@@ -148,7 +149,8 @@ export default {
       prenom: "Julien",
       addresses : [],
       links: [],
-      compteur: 0
+      compteur: 0,
+      commentCount: "",
     }
   },
   methods: {
@@ -180,13 +182,13 @@ export default {
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
 
-    // je charge les commentaires derriere API
-    const commentsRes = await axios.get(`http://localhost:3000/comments`);
-    this.comments = commentsRes.data
      // je charge les liens derriere API
     const resVideo = await axios.get(`http://localhost:3000/ma-video`);
     this.urlVideo = resVideo.data.video
     this.titreVideo =  resVideo.data.title
+
+    const resCount = await axios.get(`http://localhost:3000/comments`);
+    this.commentCount = resCount.data.count[0]
   }
 
 }
