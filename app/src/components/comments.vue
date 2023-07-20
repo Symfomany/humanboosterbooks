@@ -8,10 +8,10 @@
             <hr>
             <div class="row">
                 <div class="col-6">
-                <b>Utilisateur :</b>{{ users.firstname, users.lastname }}<br />
+                <b>Utilisateur : </b>{{ comment.firstname }} {{ comment.lastname }}<br />
                 </div>
                 <div class="col-6">
-                <b>Livre :</b> {{ books.title }} <br />
+                <b>Livre :</b> {{ comment.title }} <br />
                 </div>
             </div>
             <div>
