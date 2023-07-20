@@ -41,7 +41,57 @@
 
 
 
+
+
+
+
+
+
+
+        
+        <p>{{ tusers[0].id }}</p>
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Firstname</th>
+              <th scope="col">Lastname</th>
+              <th scope="col">Email</th>              
+              <th scope="col">Password</th>              
+              <th scope="col">Age</th>
+              <th scope="col">Activé</th>
+              <th scope="col">Profile id</th>
+              <th scope="col">Date d'authentification</th>
+              <th scope="col">Date de création</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="users in tusers.slice(0, 10)" :key="users.id">
+              <th>{{ users.id }}</th>
+              <td>{{ users.firstname }}</td>
+              <td>{{ users.lastname }}</td>
+              <td>{{ users.email }}</td>
+              <td>{{ users.password }}</td>
+              <td>{{ users.age }}</td>
+              <td>{{ users.enable }}</td>
+              <td>{{ users.profile_id }}</td>
+              <td>{{ users.date_auth }}</td>
+              <td>{{ users.date_created }}</td>
+            </tr>
+          </tbody>
+        </table>
     </div>
+
+
+
+
+
+
+
+
+
+    
+    
   </template>
   
 
@@ -58,7 +108,8 @@
     },
     data(){
       return {
-        users: []
+        users: [],
+        tusers: [] 
       }
     },
 
@@ -87,8 +138,9 @@
     this.age = ""
     this.email = ""
     this.pswd = ""
-
     },
+
+    
   async deleteUser(userId) {
     try {
       await axios.delete(`http://localhost:3000/users/${userId}`);
@@ -97,9 +149,16 @@
     } catch (error) {
       console.error(error);
     }
-  }
-  }
-
+  
+    async tableUsers() {
+      const tUsers = await axios.get(`http://localhost:3000/users`);
+        this.tusers = tUsers.data
+    }
+  },
+},
+  async created(){
+    await this.tableUsers()
+  },
 }
 
 </script>
