@@ -169,6 +169,8 @@ export default {
     //Les Auteurs
     const authorData = await axios.get(`http://localhost:3000/authors`);
     this.authors = authorData.data
+
+    //
   }
   
 
@@ -176,6 +178,6 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
 
 </style>

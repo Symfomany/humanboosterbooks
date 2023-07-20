@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const cors = require("cors");
 
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, Association } = require("sequelize");
 const { Op } = require("sequelize");
 const bodyParser = require("body-parser");
 // parse application/x-www-form-urlencoded
@@ -46,6 +46,13 @@ app.get("/authors", async (req, res) => {
 app.get("/editors", async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT * FROM editors");
 
+  return res.json(results);
+});
+
+app.get("/title-books", async (req, res) => {
+  const [results, metadata] = await sequelize.query(
+    "SELECT books.title, authors.firstname, authors.lastname FROM authors INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id INNER JOIN books ON books_has_authors.books_id = books.id GROUP BY books.id ORDER BY books.publication_date ASC LIMIT 5"
+  );
   return res.json(results);
 });
 
