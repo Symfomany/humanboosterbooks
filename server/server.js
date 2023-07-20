@@ -104,6 +104,21 @@ app.post('/users', async (req, res) => {
   res.json(results)
 })
 
+app.post('/profiles', async (req, res) => {
+  
+  let dob = req.body.dob
+  let lang =  req.body.lang
+  let phone =  req.body.phone
+  let pid =  req.body.pid
+  let geoloc =  req.body.geoloc
+
+  const [results, metadata] = await sequelize.query(`
+    INSERT INTO users (dob, lang, phone, pid, geoloc) VALUES ("${dob}", "${lang}", "${phone}", "${pid}", "${geoloc}" )
+  `);
+
+  res.json(results)
+})
+
 
 // Route en POST 
 
