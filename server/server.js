@@ -53,6 +53,13 @@ app.get('/ma-video', async (req, res) => {
   return res.json(results[0])
 })
 
+// une route pour récupérer les utilisateurs
+app.get('/users', async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT * FROM users ORDER BY date_created DESC");
+
+  return res.json(results)
+})
+
 
 
 
