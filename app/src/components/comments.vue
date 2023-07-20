@@ -1,18 +1,25 @@
 <template>
     <div class="container">
-      <div v-if="comments.length" class="row">
+      <div v-if="comments.length">
         <ul class="list-inline">
             <li
             v-for="(comment, index) in comments"
-            :key="index"
-            class="card"
-            >
-            <b>Utilisateur :</b>{{ comment.users_id }}<br />
-            <b>Livre :</b> {{ comment.books_id }} <br />
-            <b>Commentaire :</b>{{ comment.content }}<br />
-            <b> Nombre de vues </b>{{ comment.views }}<br />
-            <b>Date de création :</b>{{ comment.created_date }} <br />
-            <b>Dernière mise à jour :</b>{{ comment.updated_day_time }} <br />
+            :key="index">
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                <b>Utilisateur :</b>{{ users.firstname, users.lastname }}<br />
+                </div>
+                <div class="col-6">
+                <b>Livre :</b> {{ books.title }} <br />
+                </div>
+            </div>
+            <div>
+            {{ comment.content }}
+            </div>
+            <b>Vues :</b>{{ comment.views }}<br />
+            Créé le {{ comment.created_date }} <br />
+            Mis à jour le {{ comment.updated_day_time }} <br />
             </li>
         </ul>
       </div>

@@ -84,8 +84,8 @@
               </div>
             </div>
 
-        <div class="col-md-6 col-lg-3">
-          <div class="card">
+        <div class="col-md-12 col-lg-6">
+          <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title">Modérer les Commentaires</h5>
               <Comments></Comments>
