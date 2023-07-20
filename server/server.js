@@ -73,10 +73,11 @@ app.get("/comments", async (req, res) => {
   const limit = req.query.limit > 0 ? parseInt(req.query.limit) : 10;
   const sortBy = "id";
   const[results, metadata] = await sequelize.query(
-      `SELECT * FROM comments ORDER BY ${sortBy} Desc LIMIT ${limit}`
+      `SELECT c.*, u.lastname, u.firstname, b.title FROM comments c JOIN users u ON c.users_id = u.id JOIN books b ON c.books_id = b.id ORDER BY ${sortBy} Desc LIMIT ${limit}`
   );
   res.json(results);
     });
+
 
 
 // Route en POST 
