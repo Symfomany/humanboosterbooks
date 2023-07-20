@@ -14,8 +14,10 @@
               </div>
             </div>
       </div>
-    
-<!--   <div class="row">
+    <br>
+
+
+   <div class="row">
             <div class="card">
               <div class="card-body">
                   <p>Video :</p>
@@ -29,7 +31,7 @@
 
               </div>
             </div>
-      </div>-->
+      </div>
 
     <div class="container text-center">
     <div class="row align-items-start">
@@ -161,7 +163,7 @@ export default {
       prenom: "Julien",
       addresses : [],
       links: [],
-      compteur: 0
+      compteur: 0,
     }
   },
   methods: {
@@ -197,6 +199,10 @@ export default {
     const resVideo = await axios.get(`http://localhost:3000/ma-video`);
     this.urlVideo = resVideo.data.video
     this.titreVideo =  resVideo.data.title
+
+     // je charge les liens derriere API
+    const resbooks = await axios.get(`http://localhost:3000/newbooks`);
+    this.newbooks = resbooks.data.books
   }
 
 }
