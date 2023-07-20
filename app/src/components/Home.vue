@@ -22,9 +22,6 @@
     <div class="container text-center">
     <div class="row align-items-start">
       
-  
-
-      
       <div class="row">
         <div class="card">
           <div class="card-body">
@@ -181,6 +178,8 @@ export default {
        this.zipcode = ""
 
     }
+    
+
   },  
   async created(){
     // je charge les adresses derriere API
