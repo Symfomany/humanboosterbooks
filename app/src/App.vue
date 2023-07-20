@@ -20,7 +20,7 @@
               <a class="nav-link" href="#"><i class="fas fa-at"></i> Les Auteurs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-users"></i> Les Utilisateurs</a>
+              <a class="nav-link" href="/user"><i class="fas fa-users"></i> Les Utilisateurs</a>
             </li>
              <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-comments"></i> Les Commentaires</a>
@@ -32,6 +32,7 @@
 
     <nav>
         <router-link to="/">Home</router-link> |
+        <router-link to="/user">Utilisateurs</router-link> |
         <router-link to="/about">About</router-link>
       </nav>
     <main class="container" id="main">
