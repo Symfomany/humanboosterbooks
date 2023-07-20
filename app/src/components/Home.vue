@@ -1,10 +1,30 @@
 <template>
   <div class="hello">
     <img src="https://campusnumerique.auvergnerhonealpes.fr/app/uploads/2019/11/logo_degrade_jaune-Baseline-300ppi.jpg" alt="">
+    
+    <!-- Vous pouvez supprimer cet exemple 
+    <div class="row">
+            <div class="card">
+              <div class="card-body">
+                  <p>Video :</p>
+                  
+                  <h3>Titre: {{  titreVideo }}</h3>
+
+                  <p>{{ urlVideo }}</p>
+                <video controls width="250">
+                    <source :src="urlVideo" type="video/mp4">
+                </video>
+
+              </div>
+            </div>
+        </div>
+
     <div class="container text-center">
     <div class="row align-items-start">
       
-      <!-- Vous pouvez supprimer cet exemple -->
+  
+
+      
       <div class="row">
         <div class="card">
           <div class="card-body">
@@ -12,7 +32,7 @@
             <h3 class="pa-2">Compteur: {{ compteur }}</h3>
             <p>{{  prenom }}</p>
           
-            <p v-if="compteur >= 10"> Whaaaouhh ! </p>
+            <div v-if="compteur >= 10"> Whaaaouhh ! </div>
             <p v-else-if="compteur > 2"> Super ! </p>
             <p v-else> Pas encore </p>
 
@@ -25,20 +45,19 @@
           </div>
         </div>
       </div>
-
-       <div class="row">
+-->
+      <div class="row">
          <div class="col-md-6 col-lg-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">  Les Adresses</h5>
                 <p class="card-text">
 
-                  <div v-if="!addresses.length" class="alert alert-info" role="alert">
-                    Chargement...
-                  </div>
-                    <p v-for="addresse in addresses" :key="addresse.id"> 
-                    <i class="fas fa-list-item"></i>
-                    {{ addresse.city }}  {{ addresse.zipcode }}</p>
+                   
+                  <p v-for="addresse in addresses" :key="addresse.id"> 
+                      <i class="fas fa-list-item"></i>
+                      {{ addresse.city }}  {{ addresse.zipcode }}
+                  </p>
 
                     <input placeholder="Zipcode" type="text" class="form-control" v-model="zipcode">
                     <input placeholder="City" type="text" class="form-control" v-model="city" >
@@ -77,7 +96,13 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"> Gérer les Utilisateurs </h5>
-              <p class="card-text">Description du contenu de la carte 2.</p>
+              <p class="card-text">Les 10 derniers utilisateurs</p>
+
+              <p v-for="user in users" :key="user.id"> 
+                      <i class="fas fa-list-item"></i>
+                      {{ user.firstname }}  {{ user.lastname }}
+              </p>
+
             </div>
           </div>
         </div>
@@ -100,6 +125,8 @@
       </div>
 
       
+
+      
       
     
     </div>
@@ -120,13 +147,21 @@ export default {
     return {
       zipcode: "",
       city: "",
+      titreVideo: "",
+      urlVideo: "",
       prenom: "Julien",
       addresses : [],
       links: [],
-      compteur: 0
+      compteur: 0,
+      users: []
     }
   },
   methods: {
+    async lastUsers() {
+      const resUser = await axios.get(`http://localhost:3000/users`);
+      this.users = resUser.data
+    },
+
     augmenterFive(){
       this.compteur += 5
     },
@@ -154,7 +189,17 @@ export default {
     // je charge les liens derriere API
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
-  }
+
+     // je charge les liens derriere API
+    const resVideo = await axios.get(`http://localhost:3000/ma-video`);
+    this.urlVideo = resVideo.data.video
+    this.titreVideo =  resVideo.data.title
+
+    await this.lastUsers()
+  },
+
+ 
+
 
 }
 </script>
