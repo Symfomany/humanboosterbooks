@@ -2,7 +2,7 @@
   <div class="hello">
     <img src="https://campusnumerique.auvergnerhonealpes.fr/app/uploads/2019/11/logo_degrade_jaune-Baseline-300ppi.jpg" alt="">
     
-    
+    <!-- Vous pouvez supprimer cet exemple 
     <div class="row">
             <div class="card">
               <div class="card-body">
@@ -24,7 +24,7 @@
       
   
 
-      <!-- Vous pouvez supprimer cet exemple -->
+      
       <div class="row">
         <div class="card">
           <div class="card-body">
@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-
+-->
       <div class="row">
          <div class="col-md-6 col-lg-3">
             <div class="card">
@@ -96,7 +96,13 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"> Gérer les Utilisateurs </h5>
-              <p class="card-text">Description du contenu de la carte 2.</p>
+              <p class="card-text">Les 10 derniers utilisateurs</p>
+
+              <p v-for="user in users" :key="user.id"> 
+                      <i class="fas fa-list-item"></i>
+                      {{ user.firstname }}  {{ user.lastname }}
+              </p>
+
             </div>
           </div>
         </div>
