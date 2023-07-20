@@ -152,10 +152,16 @@ export default {
       prenom: "Julien",
       addresses : [],
       links: [],
-      compteur: 0
+      compteur: 0,
+      users: []
     }
   },
   methods: {
+    async lastUsers() {
+      const resUser = await axios.get(`http://localhost:3000/users`);
+      this.users = resUser.data
+    },
+
     augmenterFive(){
       this.compteur += 5
     },
@@ -188,7 +194,12 @@ export default {
     const resVideo = await axios.get(`http://localhost:3000/ma-video`);
     this.urlVideo = resVideo.data.video
     this.titreVideo =  resVideo.data.title
-  }
+
+    await this.lastUsers()
+  },
+
+ 
+
 
 }
 </script>
