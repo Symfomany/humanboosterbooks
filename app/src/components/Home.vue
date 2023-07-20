@@ -169,8 +169,6 @@ export default {
     //Les Auteurs
     const authorData = await axios.get(`http://localhost:3000/authors`);
     this.authors = authorData.data
-
-    //
   }
   
 
