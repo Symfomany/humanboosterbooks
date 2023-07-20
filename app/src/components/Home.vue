@@ -2,8 +2,20 @@
   <div class="hello">
     <img src="https://campusnumerique.auvergnerhonealpes.fr/app/uploads/2019/11/logo_degrade_jaune-Baseline-300ppi.jpg" alt="">
     
+
+    
     
     <div class="row">
+            <div class="card">
+              <div class="card-body">
+
+                  <Books></Books>
+
+              </div>
+            </div>
+      </div>
+    
+<!--   <div class="row">
             <div class="card">
               <div class="card-body">
                   <p>Video :</p>
@@ -17,7 +29,7 @@
 
               </div>
             </div>
-        </div>
+      </div>-->
 
     <div class="container text-center">
     <div class="row align-items-start">
@@ -131,11 +143,14 @@
 <script>
 import axios from 'axios';
 import HumanBooster from './HumanBooster.vue'
+import Books from './Books.vue'
+
 export default {
   name: 'Home',
   props: {},
   components: {
-    HumanBooster
+    HumanBooster,
+    Books
   },
   data(){
     return {
