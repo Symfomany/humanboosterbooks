@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-      <h3>Commentaires</h3>
       <div v-if="comments.length" class="row">
         <div
           v-for="(comment, index) in comments"

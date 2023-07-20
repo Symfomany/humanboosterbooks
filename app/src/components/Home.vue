@@ -68,8 +68,8 @@
         <div class="col-md-6 col-lg-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">  Modérer les Commentaires</h5>
-              <p class="card-text">Description du contenu de la carte 1.</p>
+              <h5 class="card-title">Modérer les Commentaires</h5>
+              <Comments></Comments>
             </div>
           </div>
         </div>
@@ -110,10 +110,12 @@
 <script>
 import axios from 'axios';
 import HumanBooster from './HumanBooster.vue'
+import Comments from './comments.vue'
 export default {
   name: 'Home',
   props: {},
   components: {
+    Comments,
     HumanBooster
   },
   data(){
@@ -154,6 +156,10 @@ export default {
     // je charge les liens derriere API
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
+
+    // je charge les commentaires derriere API
+    const commentsRes = await axios.get(`http://localhost:3000/comments`);
+    this.comments = commentsRes.data
   }
 
 }
