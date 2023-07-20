@@ -94,6 +94,9 @@
             <div class="card-body">
               <h5 class="card-title">Modérer les Auteurs et Editions </h5>
               <p class="card-text">Description du contenu de la carte 4.</p>
+              <!-- MyComponent -->
+                <Authors v-if="currentComponent == true"></Authors>
+                <router-link to="/authors">Authors</router-link>
             </div>
           </div>
         </div>
@@ -109,12 +112,16 @@
 
 <script>
 import axios from 'axios';
-import HumanBooster from './HumanBooster.vue'
+import HumanBooster from './HumanBooster.vue';
+import Authors from './Authors.vue';
+
+
 export default {
   name: 'Home',
   props: {},
   components: {
-  HumanBooster
+    HumanBooster,
+    Authors
   },
   data(){
     return {
@@ -125,7 +132,8 @@ export default {
       links: [],
       authors: [],
       editors: [],
-      compteur: 0
+      compteur: 0,
+      currentComponent: false
     }
   },
   methods: {
@@ -146,7 +154,8 @@ export default {
        this.city = ""
        this.zipcode = ""
 
-    }
+    },
+ 
   },  
   async created(){
     // je charge les adresses derriere API
@@ -157,12 +166,9 @@ export default {
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
 
-    //les Auteurs
-
+    //Les Auteurs
     const authorData = await axios.get(`http://localhost:3000/authors`);
     this.authors = authorData.data
-    
-
   }
   
 
