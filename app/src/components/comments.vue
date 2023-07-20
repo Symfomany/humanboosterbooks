@@ -38,7 +38,7 @@
     },
     async created() {
       const { data } = await axios.get(`http://localhost:3000/comments`);
-      this.comments = data;
+      this.comments = data.results;
     },
   };
   </script>
