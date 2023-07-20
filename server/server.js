@@ -57,6 +57,16 @@ app.post('/addresses', async (req, res) => {
   res.json(results)
 })
 
+//une route pour les commentaires
+app.get("/comments", async (req, res) => {
+  const limit = req.query.limit > 0 ? parseInt(req.query.limit) : 10;
+  const sortBy = "id";
+  const[results, metadata] = await sequelize.query(
+      `SELECT * FROM comments ORDER BY ${sortBy} Desc LIMIT ${limit}`
+  );
+  res.json(results);
+    });
+
 
 // Route en POST 
 
