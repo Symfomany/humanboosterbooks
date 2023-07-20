@@ -62,6 +62,14 @@ const [results, metadata] = await sequelize.query
 })
 
 
+// une route pour récupérer les auteurs
+app.get('/newAuthors', async (req, res) => {
+  const [results, metadata] = await sequelize.query
+  ("SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname FROM authors INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id INNER JOIN books ON books_has_authors.books_id = books.id");
+  
+    return res.json(results)
+  })
+
 app.post('/addresses', async (req, res) => {
   
   let zipcode = req.body.zipcode
