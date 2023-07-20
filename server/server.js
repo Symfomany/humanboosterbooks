@@ -60,6 +60,11 @@ app.get('/users', async (req, res) => {
   return res.json(results)
 })
 
+app.get('/profiles', async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT * FROM profiles LEFT JOIN users ON users.profile_id = profiles.id");
+
+  return res.json(results)
+})
 
 
 
