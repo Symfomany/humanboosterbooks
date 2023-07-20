@@ -1,4 +1,4 @@
-<template>
+<!--<template>
     <div>
         <h3 v-if="compteur > 5">Mon super titre: {{ compteur }}</h3>
     </div>
@@ -10,4 +10,4 @@ export default {
 
 
 }
-</script>
+</script>-->

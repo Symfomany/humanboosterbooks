@@ -98,9 +98,11 @@
               <h5 class="card-title"> Gérer les Utilisateurs </h5>
               <p class="card-text">Les 10 derniers utilisateurs</p>
 
-              <p v-for="user in users" :key="user.id"> 
+              <p v-for="user in users.slice(0, 10)" :key="user.id"> 
+                
                       <i class="fas fa-list-item"></i>
                       {{ user.firstname }}  {{ user.lastname }}
+                    
               </p>
 
             </div>
@@ -179,6 +181,8 @@ export default {
        this.zipcode = ""
 
     }
+    
+
   },  
   async created(){
     // je charge les adresses derriere API
