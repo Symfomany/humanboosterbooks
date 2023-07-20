@@ -55,14 +55,20 @@
     },
     data(){
       return {
-        users: []
+        users: [],
+        fname: "",
+        lname: "",
+        age:"",
+        email:"",
+        pswd:""
       }
     },
 
 
 
   methods: {
-  async addUser(){
+  async addUser(e){
+    e.preventDefault()
     const { data } = await axios.post(`http://localhost:3000/users`, {
       fname: this.fname,
       lname: this.lname,
