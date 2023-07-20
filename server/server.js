@@ -43,6 +43,16 @@ app.get("/authors", async (req, res) => {
   return res.json(results);
 });
 
+app.get("/nb_authors", async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT COUNT(authors.id) as nb_authors FROM authors");
+  return res.json(results);
+});
+
+app.get("/nb_editors", async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT COUNT(editors.id) as nb_editors FROM editors");
+  return res.json(results);
+});
+
 app.get("/editors", async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT * FROM editors");
 
