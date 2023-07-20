@@ -1,17 +1,17 @@
 <template>
   <div class="container">
-    <h3>Stats liés au commandes</h3>
-    <div v-if="ordersStats.length">
-      <div class="card col-md-6 col-lg-3">
+    <h3>Stats liées au commandes</h3>
+    <div class="row" v-if="ordersStats.length">
+      <div class="card col-md-6 col-lg-3 mx-auto">
         <div v-for="(stat, index) in ordersStats" :key="index">
           <p>
-            nombre de commandes pour le status "{{ stat.status }}" :{{
-              stat.nb_orders_by_stats
-            }}
+            Nombre de commandes pour le status "{{ stat.status }}" :
+            {{ stat.nb_orders_by_stats }}
           </p>
         </div>
+
         <p>
-          nombre total de commandes :
+          Nombre total de commandes :
           {{
             ordersStats.reduce((sum, e) => {
               return (sum += e.nb_orders_by_stats);
@@ -19,8 +19,16 @@
           }}
         </p>
       </div>
+      <p>
+        nombre total de commandes :
+        {{
+          ordersStats.reduce((sum, e) => {
+            return (sum += e.nb_orders_by_stats);
+          }, 0)
+        }}
+      </p>
     </div>
-    <template v-else><p>aucune stats / chargement...</p></template>
+    <div v-else><p>aucune stats / chargement...</p></div>
   </div>
 </template>
 
