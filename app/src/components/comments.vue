@@ -2,7 +2,7 @@
     <div class="container">
       <div v-if="comments.length">
         <ul class="list-inline">
-            <li
+            <div
             v-for="(comment, index) in comments"
             :key="index">
             <hr>
@@ -20,7 +20,7 @@
             <b>Vues :</b>{{ comment.views }}<br />
             Créé le {{ comment.created_date }} <br />
             Mis à jour le {{ comment.updated_day_time }} <br />
-            </li>
+        </div>
         </ul>
       </div>
       <template v-else>
