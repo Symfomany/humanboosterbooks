@@ -58,6 +58,13 @@ app.get("/orders", async (req, res) => {
   res.json(results);
 });
 
+app.get("/orders/stats", async (req, res) => {
+  const [results, metadata] = await sequelize.query(
+    `SELECT COUNT(*) AS nb_orders_by_stats ,status FROM orders GROUP BY status;`
+  );
+  res.json(results);
+})
+
 // Route en POST
 
 app.listen(port, () => {
