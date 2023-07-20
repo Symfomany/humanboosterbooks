@@ -20,7 +20,7 @@
         </p>
       </div>
       <p>
-        Nb total de commandes :
+        Nombre total de commandes :
         {{
           ordersStats.reduce((sum, e) => {
             return (sum += e.nb_orders_by_stats);
