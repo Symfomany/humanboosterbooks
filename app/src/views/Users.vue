@@ -33,7 +33,19 @@
         </form>
         </div>
 
-
+        <div class="row">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nombre d'utilisateurs actifs</th>
+                <th scope="col">Nombre d'utilisateurs actifs</th>
+              </tr>
+              <tr>
+                <th scope="col">{{ nombre_utilisateurs }}</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
 
 
 
