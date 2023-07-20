@@ -1,7 +1,8 @@
 <template>
-     <div>  
+     <div class="news">  
         <h2>Nos nouveautés</h2>
         {{ books.length}} books
+        
         <div v-for="book in books" :key="books.id" class = "card custom-card">
             <img src ="{{}}" alt="">
             <div  >
@@ -13,7 +14,7 @@
            
             <div>
                 <p> {{book.publication_date}} </p>
-                <p> <!--auteurs --> </p>
+                <p> <!--auteurs AVG ('price')--> </p>
                 <p> <!--édition --> </p>
             </div>
 
@@ -67,6 +68,11 @@ export default {
 
 
 <style>
+
+.news {
+    padding:10px;
+}    
+    
     h3{
         color: blue
     }
