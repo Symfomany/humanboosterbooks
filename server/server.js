@@ -60,6 +60,7 @@ app.get('/users', async (req, res) => {
   return res.json(results)
 })
 
+//route pour récup les profiles et les lier aux users
 app.get('/profiles', async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT * FROM profiles LEFT JOIN users ON users.profile_id = profiles.id");
 
