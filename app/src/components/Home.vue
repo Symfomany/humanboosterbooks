@@ -114,7 +114,7 @@ export default {
   name: 'Home',
   props: {},
   components: {
-    HumanBooster
+  HumanBooster
   },
   data(){
     return {
@@ -124,6 +124,7 @@ export default {
       addresses : [],
       links: [],
       authors: [],
+      editors: [],
       compteur: 0
     }
   },
@@ -155,7 +156,15 @@ export default {
     // je charge les liens derriere API
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
+
+    //les Auteurs
+
+    const authorData = await axios.get(`http://localhost:3000/authors`);
+    this.authors = authorData.data
+    
+
   }
+  
 
 }
 </script>
