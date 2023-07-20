@@ -1,18 +1,20 @@
 <template>
     <div class="container">
       <div v-if="comments.length" class="row">
-        <div
-          v-for="(comment, index) in comments"
-          :key="index"
-          class="card col-md-6 col-lg-3"
-        >
-          Utilisateur :{{ comment.users_id }}<br />
-          Livre : {{ comment.books_id }} <br />
-          Commentaire :{{ comment.content }}<br />
-          Nombre de vues :{{ comment.views }}<br />
-          Date de création :{{ comment.created_date }} <br />
-          Dernière mise à jour :{{ comment.updated_day_time }} <br />
-        </div>
+        <ul class="list-inline">
+            <li
+            v-for="(comment, index) in comments"
+            :key="index"
+            class="card"
+            >
+            <b>Utilisateur :</b>{{ comment.users_id }}<br />
+            <b>Livre :</b> {{ comment.books_id }} <br />
+            <b>Commentaire :</b>{{ comment.content }}<br />
+            <b> Nombre de vues </b>{{ comment.views }}<br />
+            <b>Date de création :</b>{{ comment.created_date }} <br />
+            <b>Dernière mise à jour :</b>{{ comment.updated_day_time }} <br />
+            </li>
+        </ul>
       </div>
       <template v-else>
         <p>No comments...</p>
