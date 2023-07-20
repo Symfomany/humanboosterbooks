@@ -6,6 +6,7 @@
       <div v-for="(stat, index) in ordersStats" :key="index">
         <p>Nombre de commandes pour le status "{{stat.status}}" : {{ stat.nb_orders_by_stats }}</p>
       </div>
+      
         <p>
           Nombre total de commandes :
           {{ ordersStats.reduce((sum, e) => {
