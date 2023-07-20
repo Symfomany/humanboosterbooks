@@ -1,6 +1,8 @@
 <template>
      <div>  
         <h2>Nos nouveautés</h2>
+        
+
         {{ books.length}} books
         <div v-for="book in books" :key="books.id" class = "card custom-card">
             <img src ="{{}}" alt="">
