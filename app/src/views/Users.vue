@@ -32,6 +32,21 @@
             <button type="submit" @click="addUser" class="btn btn-primary">Submit</button>
         </form>
         </div>
+
+        <div class="row">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nombre d'utilisateurs actifs</th>
+                <th scope="col">Nombre d'utilisateurs actifs</th>
+              </tr>
+              <tr>
+                <th scope="col">{{ nombre_utilisateurs }}</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
 <!--boucle v-for pour afficher tous les utilisateurs et bouton supprimer-->
         <div v-for="user in users" :key="user.id">
           <p>{{ user.fname }} {{ user.lname }}</p>
@@ -108,10 +123,10 @@
     },
     data(){
       return {
-        users: [],
-        tusers: [] 
+        users: []
       }
     },
+  
 
 
 
@@ -141,21 +156,13 @@
     },
 
     
-  async deleteUser(userId) {
-    try {
-      await axios.delete(`http://localhost:3000/users/${userId}`);
-      // Mettre à jour la liste des utilisateurs localement pour refléter les changements côté serveur
-      this.users = this.users.filter(user => user.id !== userId);
-    } catch (error) {
-      console.error(error);
-    }
-  
+
     async tableUsers() {
       const tUsers = await axios.get(`http://localhost:3000/users`);
         this.tusers = tUsers.data
-    }
-  },
-},
+      }
+    },
+
   async created(){
     await this.tableUsers()
   },
