@@ -60,6 +60,16 @@ app.get('/users', async (req, res) => {
   return res.json(results)
 })
 
+// une route pour récupérer et compter les utilisateurs actifs et inactifs
+app.get('/status_users_count', async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT enable, COUNT(*) AS nombre_utilisateurs FROM users GROUP BY enable");
+})
+  //route pour récup les profiles et les lier aux users
+app.get('/profiles', async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT * FROM profiles LEFT JOIN users ON users.profile_id = profiles.id");
+
+  return res.json(results)
+})
 
 
 
