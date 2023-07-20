@@ -80,8 +80,15 @@ app.get("/comments", async (req, res) => {
   res.json({results,count});
     });
 
+//route pour delete les commentaires
+app.post('/delete-comments', async (req, res) => {
 
+  let delete_comments = req.body.id
 
+  const [results, metadata] = await sequelize.query (
+      `DELETE FROM comments WHERE comment_id = ${delete_comments}`
+  );
+});
 // Route en POST 
 
 app.listen(port, () => {
