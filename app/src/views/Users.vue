@@ -89,10 +89,11 @@
               <th scope="col">Profile id</th>
               <th scope="col">Date d'authentification</th>
               <th scope="col">Date de création</th>
+              <th scope="col">Suppression</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="users in tusers.slice(0, 10)" :key="users.id">
+            <tr v-for="users in tusers.slice(0, 10)" :key="users.id"> <!--Limiter nombre de users à 10 avec slice-->
               <th>{{ users.id }}</th>
               <td>{{ users.firstname }}</td>
               <td>{{ users.lastname }}</td>
@@ -103,6 +104,7 @@
               <td>{{ users.profile_id }}</td>
               <td>{{ users.date_auth }}</td>
               <td>{{ users.date_created }}</td>
+              <td><button @click="deleteUser(users.id)">Supprimer</button></td>
             </tr>
           </tbody>
         </table>
