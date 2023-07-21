@@ -1,13 +1,29 @@
 <template>
    <div>
-    <p v-for="nbAuthorsData in authors" :key="nbAuthorsData.id">Le nombre d'auteurs 
-                    <i class="fas fa-list-item"></i>
-                    {{ nbAuthorsData.nb_authors }} </p>
+        <h3>Hello Guys</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni molestias at, tenetur illum doloribus quasi eligendi voluptatem quaerat iusto rem corrupti. Nesciunt nisi, quasi delectus molestiae nemo nam unde eum!</p>
 
-    <p v-for="nbEditorsData in editors" :key="nbEditorsData.id">Le nombre d'éditeurs 
+
+        <p v-for="authorData in authors" :key="authorData.id"> 
                     <i class="fas fa-list-item"></i>
-                    {{ nbEditorsData.nb_editors }} </p>
-   </div>
+                    {{ authorData.firstname }}  {{ authorData.lastname }}</p>
+
+                    <hr>
+
+                    <p v-for="editorNameNbBook in editors" :key="editorNameNbBook.id"> Nom de l'éditeur
+                    <i class="fas fa-list-item"></i>
+                    {{ editorNameNbBook.name }} : nombre livre {{ editorNameNbBook.nb_books }}</p>
+
+                    <hr>
+
+                    <p :key="nb_editor.id"> Nb éditeur
+                    <i class="fas fa-list-item"></i>
+                    {{ nb_editor.nb_editor }}</p>
+
+                    <p :key="nb_author.id"> Nb autheur
+                    <i class="fas fa-list-item"></i>
+                    {{ nb_author.nb_author }}</p>
+    </div>
 </template>
 
 <script>
