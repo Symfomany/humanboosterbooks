@@ -56,6 +56,18 @@ app.get("/title-books", async (req, res) => {
   return res.json(results);
 });
 
+app.post("/detail-auteur", async (req, res) => {
+  let id = req.body.id;
+
+  const [results, metadata] = await sequelize.query(
+    "SELECT * FROM `authors` WHERE authors.id = :id",
+    {
+      replacements: { id: id },
+    }
+  );
+  return res.json(results);
+});
+
 app.post("/addresses", async (req, res) => {
   let zipcode = req.body.zipcode;
   let city = req.body.city;

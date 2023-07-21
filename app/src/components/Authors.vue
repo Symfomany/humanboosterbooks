@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             <tr v-for="author in authors" :key="author.id">
-                <td scope="row" > {{ author.firstname }} </td>
+                <td scope="row" @click="sendIdAuthors(author.id)" > {{ author.firstname }} </td>
                 <td scope="row"> {{ author.lastname }} </td>
                 <td scope="row"> {{ author.biography }} </td>
             </tr>
@@ -37,7 +37,10 @@ export default {
       }
     },
     methods: {
-   
+    sendIdAuthors(id){
+        // ROUTER naviguation
+        this.$router.push({ name: 'Details', params: { id: id } })
+      }
     },  
     async created(){
   

@@ -23,7 +23,7 @@ const routes = [
     component: Authors,
   },
   {
-    path: "/details",
+    path: "/details/:id",
     name: "Details",
     component: Details,
   },
