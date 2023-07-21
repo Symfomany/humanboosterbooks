@@ -61,6 +61,14 @@ const [results, metadata] = await sequelize.query
   return res.json(results)
 })
 
+// une route pour récupérer les stats
+app.get('/stats', async (req, res) => {
+  const [results, metadata] = await sequelize.query
+  ("SELECT COUNT(*) AS nombre_livres_disponibles, SUM(CASE WHEN cover = '1' THEN 1 ELSE 0 END) AS nombre_livres_couverture, SUM(views) AS nombre_vues_totales, AVG(price) AS prix_moyen FROM books");
+  
+    return res.json(results)
+  })
+
 
 app.post('/addresses', async (req, res) => {
   
