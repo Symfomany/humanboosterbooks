@@ -20,7 +20,7 @@
         </p>
       </div>
     </div>
-    <div v-else><p>aucune stats / chargement...</p></div>
+    <div v-else><p>Aucune stats / Chargement...</p></div>
   </div>
 </template>
 
@@ -33,7 +33,6 @@ export default {
   },
   async created() {
     const { data } = await axios.get(`http://localhost:3000/orders/stats`);
-    console.log(data);
     this.ordersStats = data;
   },
 };
