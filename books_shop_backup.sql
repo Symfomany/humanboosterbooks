@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 19 juil. 2023 à 14:55
+-- Généré le : ven. 21 juil. 2023 à 09:52
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `books_shop`
+-- Base de données : `books_shop_backup`
 --
 
 -- --------------------------------------------------------
@@ -31,9 +31,9 @@ DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE IF NOT EXISTS `addresses` (
   `id` int NOT NULL AUTO_INCREMENT,
   `zipcode` int DEFAULT NULL,
-  `city` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci,
-  `country` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `country` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -72,10 +72,10 @@ CREATE TABLE IF NOT EXISTS `addresses_has_orders` (
 DROP TABLE IF EXISTS `authors`;
 CREATE TABLE IF NOT EXISTS `authors` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lastname` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `biography` text COLLATE utf8mb4_unicode_ci,
-  `prize` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firstname` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastname` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `biography` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `prize` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `images_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_authors_images1_idx` (`images_id`)
@@ -101,18 +101,18 @@ INSERT INTO `authors` (`id`, `firstname`, `lastname`, `biography`, `prize`, `ima
 DROP TABLE IF EXISTS `books`;
 CREATE TABLE IF NOT EXISTS `books` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` decimal(2,0) DEFAULT NULL,
-  `synopsis` text COLLATE utf8mb4_unicode_ci,
-  `isbn` longtext COLLATE utf8mb4_unicode_ci,
+  `synopsis` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `isbn` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `publication_date` date DEFAULT NULL,
-  `collection` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `collection` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `longueur` decimal(45,0) DEFAULT NULL,
   `largeur` decimal(10,0) NOT NULL,
   `profondeur` decimal(10,0) NOT NULL,
   `disponibility` tinyint DEFAULT NULL,
-  `lang` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` enum('papier','numerique') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` enum('papier','numerique') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nb_page` int DEFAULT NULL,
   `views` int DEFAULT NULL,
   `cover` tinyint DEFAULT NULL,
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `books_has_newsletters` (
 DROP TABLE IF EXISTS `carts`;
 CREATE TABLE IF NOT EXISTS `carts` (
   `id` int NOT NULL,
-  `voucher_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `voucher_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `users_id` int NOT NULL,
   PRIMARY KEY (`id`,`users_id`),
   KEY `fk_carts_users1_idx` (`users_id`)
@@ -233,10 +233,10 @@ CREATE TABLE IF NOT EXISTS `carts_has_books` (
 DROP TABLE IF EXISTS `collection`;
 CREATE TABLE IF NOT EXISTS `collection` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `enable` tinyint DEFAULT NULL,
-  `price` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nb_items` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id` int NOT NULL,
   `books_id` int NOT NULL,
   `users_id` int NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `views` int DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `updated_day_time` datetime DEFAULT NULL,
@@ -268,10 +268,10 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 INSERT INTO `comments` (`id`, `books_id`, `users_id`, `content`, `views`, `created_date`, `updated_day_time`, `comments_id`) VALUES
-(0, 1, 4, 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu\'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum', 12368, '2023-07-17 14:20:57', '2023-07-17 14:20:57', NULL),
-(0, 2, 3, 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu\'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum', 2354, '2023-07-17 14:19:38', '2023-07-17 14:19:38', NULL),
-(0, 3, 2, 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu\'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum', 5364, '2023-07-17 14:17:29', '2023-07-17 14:17:29', NULL),
-(0, 5, 1, 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu\'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum', 4056, '2023-07-17 14:20:18', '2023-07-17 14:20:18', NULL);
+(1, 1, 4, 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu\'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum', 12368, '2023-07-17 14:20:57', '2023-07-17 14:20:57', NULL),
+(2, 2, 3, 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu\'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum', 2354, '2023-07-17 14:19:38', '2023-07-17 14:19:38', NULL),
+(3, 3, 2, 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu\'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum', 5364, '2023-07-17 14:17:29', '2023-07-17 14:17:29', NULL),
+(4, 5, 1, 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu\'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum', 4056, '2023-07-17 14:20:18', '2023-07-17 14:20:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -282,9 +282,9 @@ INSERT INTO `comments` (`id`, `books_id`, `users_id`, `content`, `views`, `creat
 DROP TABLE IF EXISTS `editions`;
 CREATE TABLE IF NOT EXISTS `editions` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `collection` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `logo` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `collection` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `addresses_id` int DEFAULT NULL,
   `images_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -328,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `extracts` (
   `num_page` int DEFAULT NULL,
   `num_line` int DEFAULT NULL,
   `lenght` int DEFAULT NULL,
-  `content` mediumtext COLLATE utf8mb4_unicode_ci,
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `books_id` int NOT NULL,
   PRIMARY KEY (`id`,`books_id`),
   KEY `fk_extract_books1_idx` (`books_id`)
@@ -343,7 +343,7 @@ CREATE TABLE IF NOT EXISTS `extracts` (
 DROP TABLE IF EXISTS `extras`;
 CREATE TABLE IF NOT EXISTS `extras` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `key` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `value` json DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -373,8 +373,8 @@ CREATE TABLE IF NOT EXISTS `favorites` (
 DROP TABLE IF EXISTS `genres`;
 CREATE TABLE IF NOT EXISTS `genres` (
   `id` int NOT NULL,
-  `name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -413,10 +413,10 @@ CREATE TABLE IF NOT EXISTS `genres_has_books` (
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `size` int DEFAULT NULL,
-  `mimetype` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `thumbnail` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mimetype` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `thumbnail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -439,9 +439,9 @@ INSERT INTO `images` (`id`, `image`, `size`, `mimetype`, `thumbnail`) VALUES
 DROP TABLE IF EXISTS `links`;
 CREATE TABLE IF NOT EXISTS `links` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` enum('internal','external') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` enum('internal','external') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `books_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_links_books1_idx` (`books_id`)
@@ -456,13 +456,13 @@ CREATE TABLE IF NOT EXISTS `links` (
 DROP TABLE IF EXISTS `newsletters`;
 CREATE TABLE IF NOT EXISTS `newsletters` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `sender_email` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `object` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci,
+  `sender_email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `object` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `date_created` datetime DEFAULT NULL,
   `date_planed` datetime DEFAULT NULL,
   `enable` tinyint DEFAULT NULL,
-  `html` mediumtext COLLATE utf8mb4_unicode_ci,
+  `html` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `begin` datetime DEFAULT NULL,
   `nb_day` int DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -480,10 +480,10 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `price_total` float DEFAULT NULL,
   `order_date` datetime DEFAULT NULL,
   `delivery_date` date DEFAULT NULL,
-  `carrier` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `carrier` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price_ht` decimal(2,0) DEFAULT NULL,
-  `tva` enum('10','20') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('en cours','traité','livré','non livré') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tva` enum('10','20') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('en cours','traité','livré','non livré') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `voucher` float DEFAULT NULL,
   `carts_id` int NOT NULL,
   `carts_users_id` int NOT NULL,
@@ -511,8 +511,8 @@ INSERT INTO `orders` (`id`, `price_total`, `order_date`, `delivery_date`, `carri
 DROP TABLE IF EXISTS `parrainages`;
 CREATE TABLE IF NOT EXISTS `parrainages` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(70) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `enable` tinyint DEFAULT NULL,
   `users_id` int NOT NULL,
   PRIMARY KEY (`id`,`users_id`),
@@ -537,8 +537,8 @@ INSERT INTO `parrainages` (`id`, `email`, `code`, `enable`, `users_id`) VALUES
 DROP TABLE IF EXISTS `payments`;
 CREATE TABLE IF NOT EXISTS `payments` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `type` enum('VISA','MASTERCARD','Paypal','Chèque','Stripe') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `type` enum('VISA','MASTERCARD','Paypal','Chèque','Stripe') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -560,9 +560,9 @@ DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE IF NOT EXISTS `profiles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `dob` date DEFAULT NULL,
-  `token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lang` enum('fr','en','es','de') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lang` enum('fr','en','es','de') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `geoloc` point DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -634,11 +634,11 @@ INSERT INTO `relationships` (`books_id`, `books_id2`, `depth`, `visible`) VALUES
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `lastname` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `firstname` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastname` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firstname` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `age` int DEFAULT NULL,
-  `email` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `enable` tinyint DEFAULT NULL,
   `profile_id` int NOT NULL,
   `date_auth` datetime DEFAULT NULL,
@@ -686,11 +686,11 @@ CREATE TABLE IF NOT EXISTS `users_has_newsletters` (
 DROP TABLE IF EXISTS `videos`;
 CREATE TABLE IF NOT EXISTS `videos` (
   `id` int NOT NULL,
-  `video` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `author` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `thumbnail` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `author` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `thumbnail` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `publication_date` date DEFAULT NULL,
   `likes` int DEFAULT NULL,
   `views` int DEFAULT NULL,
