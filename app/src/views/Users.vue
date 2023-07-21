@@ -1,7 +1,5 @@
 <template>
-  <div>
-
-
+    <div class="container-fluid">
         <h1>Les Utilisateurs</h1>
 
         <div class="row d-flex justify-content-center">
@@ -81,7 +79,7 @@
 
 
         
-        <table class="table table-striped table-dark mt-3">
+        <table class="table table-striped table-dark">
           <thead>
             <tr>
               <th scope="col">id</th>
@@ -116,13 +114,7 @@
 
 
 
-
-
-
-
-
-
-      </div>
+    </div>
     
   </template>
   
@@ -141,7 +133,6 @@
     data(){
       return {
         users: [],
-        profiles: [],
         tusers: [],
         fname: "",
         lname: "",
@@ -159,39 +150,17 @@
 
 
   methods: {
-    async addProfiles(e){
-    e.preventDefault()
-    
-  },
-
   async addUser(e){
     e.preventDefault()
-
-    const { data } = await axios.post(`http://localhost:3000/profiles`, {
-      dob: this.dob,
-      lang: this.lang,
-      phone: this.phone,
-    });
-
-    this.profiles.push({
-      dob: this.dob,
-      lang: this.lang,
-      phone: this.phone,
-    })
-
-    
-    this.dob = ""
-    this.lang = ""
-    this.phone = ""
-
-    await axios.post(`http://localhost:3000/users`, {
+    const { data } = await axios.post(`http://localhost:3000/users`, {
       fname: this.fname,
       lname: this.lname,
       age: this.age,
       email: this.email,
       pswd: this.pswd,
-      pid: data
-     
+      dob: this.dob,
+      lang: this.lang,
+      phone: this.phone
     });
 
     this.users.push({
@@ -200,7 +169,9 @@
       age: this.age,
       email: this.email,
       pswd: this.pswd,
-  
+      dob: this.dob,
+      lang: this.lang,
+      phone: this.phone
     })
 
     this.fname = ""
@@ -208,7 +179,9 @@
     this.age = ""
     this.email = ""
     this.pswd = ""
-   
+    this.dob = ""
+    this.lang = ""
+    this.phone = ""
   },
     
 
@@ -217,7 +190,7 @@
         this.tusers = tUsers.data
       },
 
-    async deleteUser(userId) {
+      async deleteUser(userId) {
       try {
         await axios.delete(`http://localhost:3000/users/${userId}`);
         // Mettez à jour la liste des utilisateurs localement pour refléter les changements côté serveur
@@ -225,8 +198,8 @@
       } catch (error) {
         console.error(error);
       }
-  },
-},
+    },
+    },
 
   async created(){
     await this.tableUsers()
@@ -234,6 +207,5 @@
 
   
 }
-
 
 </script>
