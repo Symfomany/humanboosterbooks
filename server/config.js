@@ -4,7 +4,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("books_shop", "root", "", {
   host: "localhost",
   dialect: "mysql",
-  port: 3308
+  //port: 3308
 });
 
 /**
