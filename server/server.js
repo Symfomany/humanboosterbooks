@@ -63,25 +63,30 @@ app.get("/orders/stats", async (req, res) => {
     `SELECT COUNT(*) AS nb_orders_by_stats ,status FROM orders GROUP BY status;`
   );
   res.json(results);
-})
-app.post
+});
+app.post;
 
 app.post("/orders/:id", async (req, res) => {
-
-  const status = req.body.status
-
-  if (req.params.id>0 && (status =="en cours" || status == "livré" || status == "non livré" || status == "traité")){
-    const id = parseInt(req.params.id)
+  const status = req.body.status;
+  let result = "";
+  if (
+    req.params.id > 0 &&
+    (status == "en cours" ||
+      status == "livré" ||
+      status == "non livré" ||
+      status == "traité")
+  ) {
+    const id = parseInt(req.params.id);
     await sequelize.query(
-    `UPDATE orders SET status = ${status} WHERE orders.id = ${id}`
-    )
-    res = "success"
-  }
-  else {
-    res = "error, invalid url or parameters"
+      `UPDATE orders SET status = "${status}" WHERE orders.id = ${id}`
+    );
+    result = "success";
+  } else {
+    result = "error, invalid url or parameters";
   }
 
-})
+  return res.json(result);
+});
 
 // Route en POST
 
