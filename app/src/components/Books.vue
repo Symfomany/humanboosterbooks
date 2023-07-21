@@ -5,9 +5,9 @@
             {{ books.length}} books
         </div>
         
-        <div class="d-flex flex-row ">
-            <div v-for="book in books" :key="books.id" class = "card custom-card " style="width: 300px">
-                <img src ="{{}}" alt="">
+        <div>
+            <div v-for="book in books" :key="books.id" class = "card custom-card">
+                <img :src = {{}} alt=" ">
                 <div  >
                     <h3> {{book.title}} </h3>
                     <p v-if="book.disponibility === 1"> Disponible </p>
@@ -23,6 +23,7 @@
 
                 <div class="desc">
                     <p>{{book.synopsis}} </p>
+                    <p><a href>Lire la suite</a></p>
                 </div>  
 
                 <div class="infos">
@@ -47,6 +48,7 @@
 
 <script>
 import axios from 'axios';
+
 
 
 export default {
