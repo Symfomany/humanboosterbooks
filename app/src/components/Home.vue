@@ -164,7 +164,6 @@ export default {
       addresses : [],
       links: [],
       compteur: 0,
-      imagecover : [],
     }
   },
   methods: {
@@ -201,9 +200,7 @@ export default {
     this.urlVideo = resVideo.data.video
     this.titreVideo =  resVideo.data.title
 
-     // je charge les liens derriere API
-    const resImg = await axios.get(`http://localhost:3000/imgcover`);
-    this.imagecover = resImg.data.images_id
+   
   }
 
 }
