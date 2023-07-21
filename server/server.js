@@ -62,6 +62,7 @@ const [results, metadata] = await sequelize.query
 })
 
 
+
 app.post('/addresses', async (req, res) => {
   
   let zipcode = req.body.zipcode
