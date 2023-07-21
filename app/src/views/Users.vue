@@ -139,6 +139,7 @@
     data(){
       return {
         users: [],
+        profiles: [],
         tusers: [],
         fname: "",
         lname: "",
@@ -156,17 +157,39 @@
 
 
   methods: {
+    async addProfiles(e){
+    e.preventDefault()
+    
+  },
+
   async addUser(e){
     e.preventDefault()
-    const { data } = await axios.post(`http://localhost:3000/users`, {
+
+    const { data } = await axios.post(`http://localhost:3000/profiles`, {
+      dob: this.dob,
+      lang: this.lang,
+      phone: this.phone,
+    });
+
+    this.profiles.push({
+      dob: this.dob,
+      lang: this.lang,
+      phone: this.phone,
+    })
+
+    
+    this.dob = ""
+    this.lang = ""
+    this.phone = ""
+
+    await axios.post(`http://localhost:3000/users`, {
       fname: this.fname,
       lname: this.lname,
       age: this.age,
       email: this.email,
       pswd: this.pswd,
-      dob: this.dob,
-      lang: this.lang,
-      phone: this.phone
+      pid: data
+     
     });
 
     this.users.push({
@@ -175,9 +198,7 @@
       age: this.age,
       email: this.email,
       pswd: this.pswd,
-      dob: this.dob,
-      lang: this.lang,
-      phone: this.phone
+  
     })
 
     this.fname = ""
@@ -185,9 +206,7 @@
     this.age = ""
     this.email = ""
     this.pswd = ""
-    this.dob = ""
-    this.lang = ""
-    this.phone = ""
+   
   },
     
 
@@ -196,7 +215,7 @@
         this.tusers = tUsers.data
       },
 
-      async deleteUser(userId) {
+    async deleteUser(userId) {
       try {
         await axios.delete(`http://localhost:3000/users/${userId}`);
         // Mettez à jour la liste des utilisateurs localement pour refléter les changements côté serveur
@@ -220,5 +239,6 @@
 
   
 }
+
 
 </script>

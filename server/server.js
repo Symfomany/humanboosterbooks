@@ -96,9 +96,11 @@ app.post('/users', async (req, res) => {
   let email =  req.body.email
   let pswd =  req.body.pswd
   let pid = req.body.pid
+  
+
 
   const [results, metadata] = await sequelize.query(`
-    INSERT INTO users (firstname, lastname, age, email, password, profile_id) VALUES ("${fname}", "${lname}", "${age}", "${email}", "${pswd}", "${pid})
+    INSERT INTO users (firstname, lastname, age, email, password, profile_id) VALUES ("${fname}", "${lname}", "${age}", "${email}", "${pswd}", "${pid}")
   `);
 
   res.json(results)
@@ -109,11 +111,9 @@ app.post('/profiles', async (req, res) => {
   let dob = req.body.dob
   let lang =  req.body.lang
   let phone =  req.body.phone
-  let pid =  req.body.pid
-  let geoloc =  req.body.geoloc
 
   const [results, metadata] = await sequelize.query(`
-    INSERT INTO users (dob, lang, phone, pid, geoloc) VALUES ("${dob}", "${lang}", "${phone}", "${pid}", "${geoloc}" )
+    INSERT INTO profiles (dob, lang, phone, geoloc, token) VALUES ("${dob}", "${lang}", "${phone}", POINT(18, -63), SHA1(RAND()))
   `);
 
   res.json(results)
@@ -124,13 +124,14 @@ app.delete('/users/:id', async (req, res) => {
   const userId = req.params.id;
 
   try {
-    // Assurez-vous d'utiliser le bon nom de la table pour "users" et l'identifiant de l'utilisateur pour "id"
+    // Supprimer l'utilisateur en fonction de l'ID spécifié
     const deletedUser = await sequelize.query(`DELETE FROM users WHERE id = ${userId}`);
     res.json({ message: 'Utilisateur supprimé avec succès' });
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la suppression de l\'utilisateur' });
   }
 });
+
 
 // Route en POST 
 
