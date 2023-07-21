@@ -1,5 +1,5 @@
 <template>
-     <div class="news">  
+    <div class="news">  
         <div class="tete"> 
             <h2>Nos nouveautés</h2>
             {{ books.length}} books
@@ -47,6 +47,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
