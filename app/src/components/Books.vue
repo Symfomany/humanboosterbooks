@@ -9,16 +9,19 @@
             <p>Nb de couvetures: {{  statsCover }}</p>
             <p>Prix moyen: {{  statsPrice }}</p>
             <p>Nb de vues: {{  statsViews }}</p>
+        </div>
         
-        
-        <div class="d-flex flex-row ">
-            <div v-for="book in books" :key="books.id" class = "card custom-card " style="width: 300px">
-                <img src ="{{}}" alt="">
-                <div  >
+        <div>
+         
+
+            <div v-for="book in books" :key="books.id" class = "card custom-card">
+                <div>
                     <h3> {{book.title}} </h3>
                     <p v-if="book.disponibility === 1"> Disponible </p>
                     <p v-else> Non disponible </p>
                     <p class="price"> {{book.price}} €</p>
+                <img :src="book.image" />
+
                 </div>
             
                 <div>
@@ -29,6 +32,7 @@
 
                 <div class="desc">
                     <p>{{book.synopsis}} </p>
+                    <p><a href>Lire la suite</a></p>
                 </div>  
 
                 <div class="infos">
@@ -56,6 +60,7 @@
 import axios from 'axios';
 
 
+
 export default {
   name: 'Books',
   data(){
@@ -67,6 +72,8 @@ export default {
       statsCover: "",
       statsViews: "",
       statsPrice: "",
+      imagecover : [],
+
     }
   },
   methods: {
@@ -83,6 +90,7 @@ export default {
     this.statsCover = resStats.data[0].nombre_livres_couverture
     this.statsViews = resStats.data[0].nombre_vues_totales
     this.statsPrice = resStats.data[0].prix_moyen
+
   }
 
 }

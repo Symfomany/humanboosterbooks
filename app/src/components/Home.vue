@@ -164,8 +164,6 @@ export default {
       addresses : [],
       links: [],
       compteur: 0,
-
-
     }
   },
   methods: {
@@ -201,7 +199,8 @@ export default {
     const resVideo = await axios.get(`http://localhost:3000/ma-video`);
     this.urlVideo = resVideo.data.video
     this.titreVideo =  resVideo.data.title
-    
+
+   
   }
 
 }
