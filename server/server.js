@@ -102,10 +102,6 @@ app.get('/newAuthors', async (req, res) => {
     return res.json(results)
   })
 
-<<<<<<< HEAD
-=======
- 
->>>>>>> 9332ffbf5d034578fee7506ce24c8853852212e4
 
 app.post('/addresses', async (req, res) => {
   
