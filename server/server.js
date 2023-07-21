@@ -56,7 +56,7 @@ app.get('/ma-video', async (req, res) => {
 // une route pour récupérer les livres
 app.get('/newbooks', async (req, res) => {
 const [results, metadata] = await sequelize.query
-("SELECT * FROM books WHERE visible = 1 ORDER BY books.publication_date DESC LIMIT 5");
+("SELECT books.*, images.image FROM books  INNER JOIN images ON books.images_id = images.id WHERE visible = 1 ORDER BY books.publication_date DESC LIMIT 5");
 
   return res.json(results)
 })
@@ -82,6 +82,13 @@ app.get('/newAuthors', async (req, res) => {
     return res.json(results)
   })
 
+  // une route pour récupérer les images
+app.get('/imgcover', async (req, res) => {
+  const [results, metadata] = await sequelize.query
+  ("SELECT images.image FROM `books` ");
+  
+    return res.json(results)
+  })
 
 app.post('/addresses', async (req, res) => {
   
