@@ -22,6 +22,14 @@
                 <input type="email" class="form-control" id="email" v-model="email">
             </div>
             <div class="mb-3">
+                <label for="phone" class="form-label">Numéro de téléphone</label>
+                <input type="text" class="form-control" id="phone" v-model="phone">
+            </div>
+            <div class="mb-3">
+                <label for="langue" class="form-label">Langue (fr,en,es,de)</label>
+                <input type="text" class="form-control" id="langue" v-model="lang">
+            </div>
+            <div class="mb-3">
                 <label for="password" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="password" v-model="pswd">
             </div>
@@ -72,10 +80,11 @@
               <th scope="col">Profile id</th>
               <th scope="col">Date d'authentification</th>
               <th scope="col">Date de création</th>
+              <th scope="col">Suppression</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="users in tusers.slice(0, 10)" :key="users.id">
+            <tr v-for="users in tusers.slice(0, 10)" :key="users.id"> <!--Limiter nombre de users à 10 avec slice-->
               <th>{{ users.id }}</th>
               <td>{{ users.firstname }}</td>
               <td>{{ users.lastname }}</td>
@@ -86,6 +95,7 @@
               <td>{{ users.profile_id }}</td>
               <td>{{ users.date_auth }}</td>
               <td>{{ users.date_created }}</td>
+              <td><button @click="deleteUser(users.id)">Supprimer</button></td>
             </tr>
           </tbody>
         </table>
@@ -117,7 +127,17 @@
     },
     data(){
       return {
-        users: []
+        users: [],
+        tusers: [],
+        fname: "",
+        lname: "",
+        age:"",
+        email:"",
+        pswd:"",
+        dob: "",
+        lang:"",
+        phone:""
+      
       }
     },
   
@@ -125,13 +145,17 @@
 
 
   methods: {
-  async addUser(){
+  async addUser(e){
+    e.preventDefault()
     const { data } = await axios.post(`http://localhost:3000/users`, {
       fname: this.fname,
       lname: this.lname,
       age: this.age,
       email: this.email,
       pswd: this.pswd,
+      dob: this.dob,
+      lang: this.lang,
+      phone: this.phone
     });
 
     this.users.push({
@@ -140,6 +164,9 @@
       age: this.age,
       email: this.email,
       pswd: this.pswd,
+      dob: this.dob,
+      lang: this.lang,
+      phone: this.phone
     })
 
     this.fname = ""
@@ -147,10 +174,21 @@
     this.age = ""
     this.email = ""
     this.pswd = ""
+    this.dob = ""
+    this.lang = ""
+    this.phone = ""
+  },
+    
 
-    }
-    }
+    async tableUsers() {
+      const tUsers = await axios.get(`http://localhost:3000/users`);
+        this.tusers = tUsers.data
+      }
+    },
 
+  async created(){
+    await this.tableUsers()
+  },
 }
 
 </script>
