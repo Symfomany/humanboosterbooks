@@ -1,5 +1,5 @@
-<template>
-    <div class="user">
+<template class="border">
+    <div class="w-100 border">
         <h1>Les Utilisateurs</h1>
 
         <div class="row d-flex justify-content-center">
@@ -41,23 +41,26 @@
                 <input type="checkbox" class="form-check-input" id="checkbox">
                 <label class="form-check-label" for="checkbox">Je suis un robot</label>
             </div>
-            <button type="submit" @click="addUser" class="btn btn-primary">Submit</button>
+            <button type="submit" @click="addUser" class="btn btn-dark">Submit</button>
         </form>
         </div>
 
-        <div class="row">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Nombre d'utilisateurs actifs</th>
-                <th scope="col">Nombre d'utilisateurs actifs</th>
-              </tr>
-              <tr>
-                <th scope="col">{{ nombre_utilisateurs }}</th>
-              </tr>
-            </thead>
-          </table>
-        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--boucle v-for pour afficher tous les utilisateurs et bouton supprimer-->
         <div v-for="user in users" :key="user.id">
@@ -76,7 +79,7 @@
 
 
         
-        <table class="table table-striped table-dark w-100">
+        <table class="table table-striped table-dark mw-100">
           <thead>
             <tr>
               <th scope="col">id</th>
@@ -86,7 +89,7 @@
               <th scope="col">Password</th>              
               <th scope="col">Age</th>
               <th scope="col">Activé</th>
-              <th scope="col">Profile id</th>
+              <th scope="col">Pf</th>
               <th scope="col">Date d'authentification</th>
               <th scope="col">Date de création</th>
               <th scope="col">Suppression</th>
@@ -104,7 +107,7 @@
               <td>{{ users.profile_id }}</td>
               <td>{{ users.date_auth }}</td>
               <td>{{ users.date_created }}</td>
-              <td><button @click="deleteUser(users.id)">Supprimer</button></td>
+              <td><button @click="deleteUser(users.id)" class="btn btn-danger">Supprimer</button></td>
             </tr>
           </tbody>
         </table>
@@ -145,8 +148,8 @@
         pswd:"",
         dob: "",
         lang:"",
-        phone:""
-      
+        phone:"",
+        countUsers: []
       }
     },
   
@@ -198,7 +201,7 @@
       try {
         await axios.delete(`http://localhost:3000/users/${userId}`);
         // Mettez à jour la liste des utilisateurs localement pour refléter les changements côté serveur
-        this.users = this.users.filter(user => user.id !== userId);
+        
       } catch (error) {
         console.error(error);
       }
@@ -208,6 +211,8 @@
   async created(){
     await this.tableUsers()
   },
+
+  
 }
 
 </script>
