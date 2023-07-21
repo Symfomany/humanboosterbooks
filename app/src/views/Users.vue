@@ -194,7 +194,7 @@
         this.tusers = tUsers.data
       },
 
-      async deleteUser(userId) {
+    async deleteUser(userId) {
       try {
         await axios.delete(`http://localhost:3000/users/${userId}`);
         // Mettez à jour la liste des utilisateurs localement pour refléter les changements côté serveur
@@ -202,12 +202,13 @@
       } catch (error) {
         console.error(error);
       }
-    }
-    },
+  },
+},
 
   async created(){
     await this.tableUsers()
   },
 }
+
 
 </script>
