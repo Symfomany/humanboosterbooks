@@ -78,6 +78,13 @@ app.get('/newAuthors', async (req, res) => {
     return res.json(results)
   })
 
+  // une route pour récupérer les images
+app.get('/imgcover', async (req, res) => {
+  const [results, metadata] = await sequelize.query
+  ("SELECT images.image FROM `books` INNER JOIN images ON books.images_id = images.id ");
+  
+    return res.json(results)
+  })
 
 app.post('/addresses', async (req, res) => {
   
