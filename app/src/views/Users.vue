@@ -192,7 +192,17 @@
     async tableUsers() {
       const tUsers = await axios.get(`http://localhost:3000/users`);
         this.tusers = tUsers.data
+      },
+
+      async deleteUser(userId) {
+      try {
+        await axios.delete(`http://localhost:3000/users/${userId}`);
+        // Mettez à jour la liste des utilisateurs localement pour refléter les changements côté serveur
+        this.users = this.users.filter(user => user.id !== userId);
+      } catch (error) {
+        console.error(error);
       }
+    }
     },
 
   async created(){
