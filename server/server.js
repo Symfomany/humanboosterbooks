@@ -64,6 +64,7 @@ app.get("/orders/stats", async (req, res) => {
   );
   res.json(results);
 })
+app.post
 
 // Route en POST
 
