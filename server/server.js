@@ -68,7 +68,6 @@ INNER JOIN editions_has_books ON books.id = editions_has_books.books_id
 INNER JOIN editions ON editions_has_books.editions_id = editions.id 
 
 
-WHERE visible = 1
 
 ORDER BY books.publication_date DESC 
 
@@ -100,7 +99,18 @@ app.get('/newAuthors', async (req, res) => {
     return res.json(results)
   })
 
- 
+ // une route pour modifier la visibilité d'un livre
+
+ app.post('/isvisible', async (req, res) => {
+  
+  let bookid = req.body.bookid
+
+  const [results, metadata] = await sequelize.query(`
+  UPDATE books SET visible = !visible WHERE books.id = ${bookid}; 
+  `);
+
+  res.json(results)
+})
 
 app.post('/addresses', async (req, res) => {
   

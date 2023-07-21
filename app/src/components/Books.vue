@@ -19,6 +19,13 @@
                     <h3> {{book.title}} </h3>
                     <p v-if="book.disponibility === 1"> Disponible </p>
                     <p v-else> Non disponible </p>
+
+                    <p v-if="book.visible === 1"> Visible </p>
+                    <p v-else> Non Visible </p>
+                    <div>
+                        <button class="btn btn-danger" @click="modifyVisibility(book.id)">Modifier la visibilité</button>
+                    </div>
+
                     <p class="price"> {{book.price}} €</p>
                     <img :src="book.image" />
 
@@ -49,6 +56,8 @@
                         <li>Type : {{book.type}} </li>
                     </ul>
                 </div>
+
+                
             </div>
         </div>
     </div>
@@ -76,7 +85,15 @@ export default {
     }
   },
   methods: {
-   
+   async modifyVisibility(id){
+        await axios.post(`http://localhost:3000/isvisible`, {
+            bookid: id
+        });
+
+        const resbooks = await axios.get(`http://localhost:3000/newbooks`);
+        this.books = resbooks.data
+
+    }
   },  
   async created(){
 
