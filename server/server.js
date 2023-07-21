@@ -56,10 +56,29 @@ app.get('/ma-video', async (req, res) => {
 // une route pour récupérer les livres
 app.get('/newbooks', async (req, res) => {
 const [results, metadata] = await sequelize.query
-("SELECT books.*, images.image FROM books  INNER JOIN images ON books.images_id = images.id WHERE visible = 1 ORDER BY books.publication_date DESC LIMIT 5");
+(`SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname , books.*, images.image , editions.name 
+FROM authors 
+
+INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id 
+INNER JOIN books ON books_has_authors.books_id = books.id 
+
+INNER JOIN images ON books.images_id = images.id 
+
+INNER JOIN editions_has_books ON books.id = editions_has_books.books_id 
+INNER JOIN editions ON editions_has_books.editions_id = editions.id 
+
+
+WHERE visible = 1
+
+ORDER BY books.publication_date DESC 
+
+LIMIT 5
+
+`);
 
   return res.json(results)
 })
+
 
 // une route pour récupérer les stats
 app.get('/stats', async (req, res) => {
@@ -72,14 +91,21 @@ app.get('/stats', async (req, res) => {
   
 
 
-// une route pour récupérer les auteurs
+// une route pour récupérer les auteurs et le détail des livres (je peux appeler books.* parce que j'ai fait la jointure à la suite)
 app.get('/newAuthors', async (req, res) => {
   const [results, metadata] = await sequelize.query
-  ("SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname FROM authors INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id INNER JOIN books ON books_has_authors.books_id = books.id");
-  
+  (`SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname , books.*
+  FROM authors 
+  INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id 
+  INNER JOIN books ON books_has_authors.books_id = books.id`);
+
     return res.json(results)
   })
 
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 9332ffbf5d034578fee7506ce24c8853852212e4
 
 app.post('/addresses', async (req, res) => {
   
