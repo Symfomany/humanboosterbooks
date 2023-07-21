@@ -11,7 +11,7 @@
       "
     >
       <div class="form-group col">
-        <label for="id"> entrez l'id de la commande à modifier </label>
+        <label for="id"> Entrez l'id de la commande à modifier :</label>
         <input
           id="id"
           class="form-control"
@@ -21,7 +21,7 @@
         />
       </div>
       <div class="form-group col">
-        <label for="status"> entrez l'id de la commande </label>
+        <label for="status"> Entrez le status de la commande :</label>
         <select id="status" class="form-control" v-model="status" required>
           <option value="">--Selectionnez un status--</option>
           <option value="en cours">En cours</option>
