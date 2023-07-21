@@ -88,8 +88,8 @@
           <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title">Modérer les Commentaires</h5>
-              <p>Nombre de commentaires : {{ commentCount.nbCount }}</p>
-              <Comments></Comments>
+              <p>Nombre de commentaires : {{ commentCount }}</p>
+              <Comments @decrementCount="commentCount--"></Comments>
             </div>
           </div>
         </div>
@@ -133,6 +133,7 @@
 import axios from 'axios';
 import HumanBooster from './HumanBooster.vue'
 import Comments from './comments.vue'
+
 export default {
   name: 'Home',
   props: {},
@@ -150,7 +151,7 @@ export default {
       addresses : [],
       links: [],
       compteur: 0,
-      commentCount: "",
+      commentCount: '',
     }
   },
   methods: {
@@ -189,7 +190,7 @@ export default {
     this.titreVideo =  resVideo.data.title
 
     const resCount = await axios.get(`http://localhost:3000/comments`);
-    this.commentCount = resCount.data.count[0]
+    this.commentCount = resCount.data.count[0].nbCount
   }
 
 }

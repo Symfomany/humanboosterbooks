@@ -42,9 +42,10 @@
         const response = await axios.post('http://localhost:3000/delete-comments', { id: commentId });
         console.log(response.data.success);
 
-        // Si la suppression est réussie, mets à jour la liste des commentaires localement
+        // Si la suppression est réussie, mets à jour la liste des commentaires
         if (response.data.success) {
           this.comments = this.comments.filter(comment => comment.id !== commentId);
+          this.$emit('decrementCount');
         }
       } catch (error) {
         console.error('Erreur lors de la suppression du commentaire :', error);
@@ -58,12 +59,6 @@
       const { data } = await axios.get(`http://localhost:3000/comments`);
       this.comments = data.results;
     },
-    /*
-    async deleteComment(){
-      const { data } = await axios.post(`http://localhost:3000/delete-comments`, {
-        id : this.id,
-      });
-    },*/
-    
+    emits: ["decrementCount"]
   };
   </script>
