@@ -4,6 +4,12 @@
             <h2>Nos nouveautés</h2>
             {{ books.length}} books
         </div>
+
+        <div>
+            <p>Nb de couvetures: {{  statsCover }}</p>
+            <p>Prix moyen: {{  statsPrice }}</p>
+            <p>Nb de vues: {{  statsViews }}</p>
+        
         
         <div>
             <div v-for="book in books" :key="books.id" class = "card custom-card">
@@ -58,6 +64,10 @@ export default {
       books : [],
       authors : [],
       books_has_authors : [],
+      stats: [],
+      statsCover: "",
+      statsViews: "",
+      statsPrice: "",
     }
   },
   methods: {
@@ -68,8 +78,13 @@ export default {
 // je charge les liens derriere API
     const resbooks = await axios.get(`http://localhost:3000/newbooks`);
     this.books = resbooks.data
+
+// je charge les liens derriere API
+    const resStats = await axios.get(`http://localhost:3000/stats`);
+    this.statsCover = resStats.data[0].nombre_livres_couverture
+    this.statsViews = resStats.data[0].nombre_vues_totales
+    this.statsPrice = resStats.data[0].prix_moyen
   }
-  
 
 }
 </script>

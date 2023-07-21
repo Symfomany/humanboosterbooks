@@ -196,7 +196,7 @@ export default {
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
 
-     // je charge les liens derriere API
+    // je charge les liens derriere API
     const resVideo = await axios.get(`http://localhost:3000/ma-video`);
     this.urlVideo = resVideo.data.video
     this.titreVideo =  resVideo.data.title
