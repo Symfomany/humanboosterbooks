@@ -6,7 +6,7 @@
         </div>
         
         <div class="d-flex flex-row ">
-            <div v-for="book in books" :key="books.id" class = "card custom-card " style="width: 300px">
+            <div v-for="book in authors" :key="books.id" class = "card custom-card " style="width: 300px">
                 <img src ="{{}}" alt="">
                 <div  >
                     <h3> {{book.title}} </h3>
@@ -17,7 +17,7 @@
             
                 <div>
                     <p> {{book.publication_date}} </p>
-                    <p> <!--auteurs --> </p>
+                    <p> {{book.author_fullname}} </p>
                     <p> <!--édition --> </p>
                 </div>
 
@@ -55,7 +55,6 @@ export default {
     return {
       books : [],
       authors : [],
-      books_has_authors : [],
     }
   },
   methods: {
@@ -66,6 +65,10 @@ export default {
 // je charge les liens derriere API
     const resbooks = await axios.get(`http://localhost:3000/newbooks`);
     this.books = resbooks.data
+
+    const resAuthors = await axios.get(`http://localhost:3000/newAuthors`);
+    this.authors = resAuthors.data
+
   }
   
 

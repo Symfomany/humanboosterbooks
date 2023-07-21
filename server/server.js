@@ -61,6 +61,7 @@ const [results, metadata] = await sequelize.query
   return res.json(results)
 })
 
+
 // une route pour récupérer les stats
 app.get('/stats', async (req, res) => {
   const [results, metadata] = await sequelize.query
@@ -70,13 +71,17 @@ app.get('/stats', async (req, res) => {
   })
 
 
-// une route pour récupérer les auteurs
+// une route pour récupérer les auteurs et le détail des livres (je peux appeler books.* parce que j'ai fait la jointure à la suite)
 app.get('/newAuthors', async (req, res) => {
   const [results, metadata] = await sequelize.query
-  ("SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname FROM authors INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id INNER JOIN books ON books_has_authors.books_id = books.id");
-  
+  (`SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname , books.*
+  FROM authors 
+  INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id 
+  INNER JOIN books ON books_has_authors.books_id = books.id`);
+
     return res.json(results)
   })
+
 
 app.post('/addresses', async (req, res) => {
   
