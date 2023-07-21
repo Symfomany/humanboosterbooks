@@ -12,22 +12,22 @@
         </div>
         
         
-        <div class="d-flex flex-row ">
-            <div v-for="book in authors" :key="books.id" class = "card custom-card " style="width: 300px">
+        <div >
+            <div v-for="book in books" :key="books.id" class = "card custom-card ">
                 <img src ="{{}}" alt="">
                 <div  >
                     <h3> {{book.title}} </h3>
                     <p v-if="book.disponibility === 1"> Disponible </p>
                     <p v-else> Non disponible </p>
                     <p class="price"> {{book.price}} €</p>
-                <img :src="book.image" />
+                    <img :src="book.image" />
 
                 </div>
             
                 <div>
                     <p> {{book.publication_date}} </p>
                     <p> {{book.author_fullname}} </p>
-                    <p> <!--édition --> </p>
+                    <p> {{book.name}} </p>
                 </div>
 
                 <div class="desc">
