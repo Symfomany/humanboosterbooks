@@ -181,6 +181,7 @@ export default {
     
 
   },  
+  
   async created(){
     // je charge les adresses derriere API
     const {data} = await axios.get(`http://localhost:3000/addresses`);
