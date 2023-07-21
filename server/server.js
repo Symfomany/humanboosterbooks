@@ -122,7 +122,7 @@ app.post('/profiles', async (req, res) => {
 //Pouvoir supprimer un utilisateur
 app.delete('/users/:id', async (req, res) => {
   const userId = req.params.id;
-
+  console.log(userId);
   try {
     // Supprimer l'utilisateur en fonction de l'ID spécifié
     const deletedUser = await sequelize.query(`DELETE FROM users WHERE id = ${userId}`);
