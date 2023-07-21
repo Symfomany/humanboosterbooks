@@ -30,7 +30,7 @@
                 <input type="text" class="form-control" id="phone" v-model="phone">
             </div>
             <div class="mb-3">
-                <label for="langue" class="form-label">Langue</label>
+                <label for="langue" class="form-label">Langue (fr,en,es,de)</label>
                 <input type="text" class="form-control" id="langue" v-model="lang">
             </div>
             <div class="mb-3">
