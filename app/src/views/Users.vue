@@ -14,24 +14,12 @@
                 <input type="name" class="form-control" id="lastname" v-model="lname">
             </div>
             <div class="mb-3">
-                <label for="dob" class="form-label">Date de naissance</label>
-                <input type="date" class="form-control" id="dob" v-model="dob">
-            </div>
-            <div class="mb-3">
                 <label for="age" class="form-label">Age</label>
                 <input type="number" class="form-control" id="age" v-model="age">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" v-model="email">
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">Numéro de téléphone</label>
-                <input type="text" class="form-control" id="phone" v-model="phone">
-            </div>
-            <div class="mb-3">
-                <label for="langue" class="form-label">Langue</label>
-                <input type="text" class="form-control" id="langue" v-model="lang">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Mot de passe</label>
@@ -50,21 +38,15 @@
             <thead>
               <tr>
                 <th scope="col">Nombre d'utilisateurs actifs</th>
-                <th scope="col">Nombre d'utilisateurs inactifs</th>
+                <th scope="col">Nombre d'utilisateurs actifs</th>
               </tr>
               <tr>
-                <th scope="col">{{ nombre_utilisateurs }}</th>
+                <th scope="col">{{ nombre_utilisateurs[0] }}</th>
               </tr>
             </thead>
           </table>
         </div>
 
-<!--boucle v-for pour afficher tous les utilisateurs et bouton supprimer-->
-        <div v-for="user in users" :key="user.id">
-          <p>{{ user.fname }} {{ user.lname }}</p>
-          <!-- Ajoutez un bouton pour supprimer l'utilisateur -->
-          <button @click="deleteUser(user.id)">Supprimer</button>
-        </div>
 
 
 
@@ -76,6 +58,7 @@
 
 
         
+        <p>{{ tusers[0].id }}</p>
         <table class="table table-striped table-dark">
           <thead>
             <tr>
@@ -134,17 +117,7 @@
     },
     data(){
       return {
-        users: [],
-        tusers: [],
-        fname: "",
-        lname: "",
-        age:"",
-        email:"",
-        pswd:"",
-        dob: "",
-        lang:"",
-        phone:""
-      
+        users: []
       }
     },
   
@@ -152,17 +125,13 @@
 
 
   methods: {
-  async addUser(e){
-    e.preventDefault()
+  async addUser(){
     const { data } = await axios.post(`http://localhost:3000/users`, {
       fname: this.fname,
       lname: this.lname,
       age: this.age,
       email: this.email,
       pswd: this.pswd,
-      dob: this.dob,
-      lang: this.lang,
-      phone: this.phone
     });
 
     this.users.push({
@@ -171,9 +140,6 @@
       age: this.age,
       email: this.email,
       pswd: this.pswd,
-      dob: this.dob,
-      lang: this.lang,
-      phone: this.phone
     })
 
     this.fname = ""
@@ -181,21 +147,10 @@
     this.age = ""
     this.email = ""
     this.pswd = ""
-    this.dob = ""
-    this.lang = ""
-    this.phone = ""
-  },
-    
 
-    async tableUsers() {
-      const tUsers = await axios.get(`http://localhost:3000/users`);
-        this.tusers = tUsers.data
-      }
-    },
+    }
+    }
 
-  async created(){
-    await this.tableUsers()
-  },
 }
 
 </script>
