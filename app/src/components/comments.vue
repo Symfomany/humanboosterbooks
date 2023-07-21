@@ -22,7 +22,7 @@
                 Créé le {{ comment.created_date }} <br />
                 Mis à jour le {{ comment.updated_day_time }} <br />
                 </div>
-                <button class="btn btn-danger" @click="()=>deleteComment(comment.id)">Supprimer</button>
+                <button class="btn btn-danger mt-2" @click="()=>deleteComment(comment.id)">Supprimer</button>
             </div>
         </ul>
       </div>
