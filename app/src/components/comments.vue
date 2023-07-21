@@ -22,7 +22,7 @@
                 Créé le {{ comment.created_date }} <br />
                 Mis à jour le {{ comment.updated_day_time }} <br />
                 </div>
-                <button class="btn btn-danger" @click="sendId"><i class="fas fa-minus"></i>Supprimer</button>
+                <button class="btn btn-danger" @click="()=>deleteComment(comment.id)">Supprimer</button>
             </div>
         </ul>
       </div>
@@ -36,6 +36,21 @@
   import axios from "axios";
   export default {
     name: "Comments",
+    methods: 
+    {async deleteComment(commentId) {
+      try {
+        const response = await axios.post('http://localhost:3000/delete-comments', { id: commentId });
+        console.log(response.data.success);
+
+        // Si la suppression est réussie, mets à jour la liste des commentaires localement
+        if (response.data.success) {
+          this.comments = this.comments.filter(comment => comment.id !== commentId);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la suppression du commentaire :', error);
+      }
+    }},
+
     data() {
       return { comments: [] };
     },
@@ -43,10 +58,12 @@
       const { data } = await axios.get(`http://localhost:3000/comments`);
       this.comments = data.results;
     },
-    async sendId(){
+    /*
+    async deleteComment(){
       const { data } = await axios.post(`http://localhost:3000/delete-comments`, {
         id : this.id,
       });
-    },
+    },*/
+    
   };
   </script>

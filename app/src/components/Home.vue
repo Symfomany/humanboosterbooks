@@ -158,8 +158,6 @@ export default {
       this.compteur += 5
     },
 
-    
-
     async ajouterAdresse(){
       const { data } = await axios.post(`http://localhost:3000/addresses`, {
         city: this.city,

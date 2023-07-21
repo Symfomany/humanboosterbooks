@@ -86,8 +86,9 @@ app.post('/delete-comments', async (req, res) => {
   let delete_comments = req.body.id
 
   const [results, metadata] = await sequelize.query (
-      `DELETE FROM comments WHERE comment_id = ${delete_comments}`
+      `DELETE FROM comments WHERE id = ${delete_comments}`
   );
+  return res.json({success : true});
 });
 // Route en POST 
 
