@@ -19,14 +19,6 @@
           }}
         </p>
       </div>
-      <p>
-        Nombre total de commandes :
-        {{
-          ordersStats.reduce((sum, e) => {
-            return (sum += e.nb_orders_by_stats);
-          }, 0)
-        }}
-      </p>
     </div>
     <div v-else><p>aucune stats / chargement...</p></div>
   </div>

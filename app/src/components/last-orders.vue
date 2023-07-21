@@ -5,7 +5,7 @@
       <div
         v-for="(order, index) in orders"
         :key="index"
-        class="card col-md-6 col-lg-3"
+        class="card col-md-6 col-lg-3 mx-auto"
       >
         numero de la commande :{{ order.id }}<br />
         prix total de la commande :{{ order.price_total }}<br />

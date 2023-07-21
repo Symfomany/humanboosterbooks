@@ -100,6 +100,7 @@
       </div>
       <LastOrders></LastOrders>
       <OrdersStats></OrdersStats>
+      <ModifyOrder/>
       
     
     </div>
@@ -112,6 +113,7 @@ import axios from 'axios';
 import HumanBooster from './HumanBooster.vue'
 import LastOrders from './last-orders.vue'
 import OrdersStats from './orders-stats.vue';
+import ModifyOrder from './modify-order.vue';
 export default {
   name: 'Home',
   props: {},
@@ -119,6 +121,7 @@ export default {
     HumanBooster,
     LastOrders,
     OrdersStats,
+    ModifyOrder
   },
   data(){
     return {
