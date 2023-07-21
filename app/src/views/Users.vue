@@ -48,14 +48,16 @@
       <div class="row">
         <table class="table">
           <thead>
-            <tr>
+            <tr is="vue:table-row">
               <th scope="col">Nombre d'utilisateurs actifs</th>
-              <th scope="col">Nombre d'utilisateurs actifs</th>
-            </tr>
-            <tr v-for="user in users" :key="users.nombre_utilisateurs">
-              <th scope="col">{{ user.nombre_utilisateurs[0] }}</th>
+              <th scope="col">Nombre d'utilisateurs inactifs</th>
             </tr>
           </thead>
+          <tbody>
+            <tr is="vue:table-row" v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
+              <td scope="col">{{ countUser.nombre_utilisateurs }}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
 
@@ -145,8 +147,8 @@
         pswd:"",
         dob: "",
         lang:"",
-        phone:""
-        
+        phone:"",
+        countUsers: []
       }
     },
   
@@ -202,12 +204,21 @@
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+
+    async countEnable() {
+    const usersEnable = await axios.get('http://localhost:3000/status_users_count');
+    this.countUsers = usersEnable.data
+    },
+
     },
 
   async created(){
     await this.tableUsers()
+    await this.countEnable()
   },
+
+  
 }
 
 </script>
