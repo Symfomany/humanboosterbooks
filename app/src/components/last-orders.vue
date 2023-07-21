@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h3>les dernières commandes</h3>
+  <div class="container m-3">
+    <h3>Les dernières commandes</h3>
     <div v-if="orders.length" class="row">
       <div
         v-for="(order, index) in orders"

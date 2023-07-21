@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container m-3">
     <h3>Stats liées au commandes</h3>
     <div class="row" v-if="ordersStats.length">
       <div class="card col-md-6 col-lg-3 mx-auto">

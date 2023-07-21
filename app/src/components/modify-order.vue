@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container m-3">
     <h3>Modifier le status d'une commande</h3>
     <form
       class="col-md-6 mx-auto"
