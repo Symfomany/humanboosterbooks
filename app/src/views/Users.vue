@@ -1,5 +1,7 @@
-<template class="border">
-    <div class="w-100 border">
+<template>
+  <div>
+
+
         <h1>Les Utilisateurs</h1>
 
         <div class="row d-flex justify-content-center">
@@ -79,7 +81,7 @@
 
 
         
-        <table class="table table-striped table-dark mw-100">
+        <table class="table table-striped table-dark mt-3">
           <thead>
             <tr>
               <th scope="col">id</th>
@@ -111,7 +113,6 @@
             </tr>
           </tbody>
         </table>
-    </div>
 
 
 
@@ -121,7 +122,7 @@
 
 
 
-    
+      </div>
     
   </template>
   
