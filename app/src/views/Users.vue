@@ -38,7 +38,7 @@
             <thead>
               <tr>
                 <th scope="col">Nombre d'utilisateurs actifs</th>
-                <th scope="col">Nombre d'utilisateurs actifs</th>
+                <th scope="col">Nombre d'utilisateurs inactifs</th>
               </tr>
               <tr>
                 <th scope="col">{{ nombre_utilisateurs }}</th>
