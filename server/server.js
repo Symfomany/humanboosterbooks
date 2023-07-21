@@ -43,15 +43,6 @@ app.get("/authors", async (req, res) => {
   return res.json(results);
 });
 
-app.get("/nb_authors", async (req, res) => {
-  const [results, metadata] = await sequelize.query("SELECT COUNT(authors.id) as nb_authors FROM authors");
-  return res.json(results);
-});
-
-app.get("/nb_editors", async (req, res) => {
-  const [results, metadata] = await sequelize.query("SELECT COUNT(editors.id) as nb_editors FROM editors");
-  return res.json(results);
-});
 
 app.get("/nb_author", async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT COUNT(AUTHORS.id) AS nb_author FROM authors;");
@@ -82,6 +73,30 @@ app.post("/addresses", async (req, res) => {
 
   const [results, metadata] = await sequelize.query(`
     INSERT INTO addresses (zipcode, city) VALUES ("${zipcode}", "${city}")
+  `);
+
+  res.json(results);
+});
+
+// Ajouter éditeur
+app.post("/editors", async (req, res) => {
+  let logo = req.body.logo;
+  let name = req.body.name;
+
+  const [results, metadata] = await sequelize.query(`
+    INSERT INTO editors (logo, name) VALUES ("${logo}", "${name}")
+  `);
+
+  res.json(results);
+});
+
+// Supprimer éditeur
+app.post("/editors", async (req, res) => {
+  let logo = req.body.logo;
+  let name = req.body.name;
+
+  const [results, metadata] = await sequelize.query(`
+  DELETE FROM editors WHERE editors.id = editor.id
   `);
 
   res.json(results);
