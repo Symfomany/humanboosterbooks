@@ -61,6 +61,22 @@ const [results, metadata] = await sequelize.query
   return res.json(results)
 })
 
+// une route pour récupérer les stats
+app.get('/stats', async (req, res) => {
+  const [results, metadata] = await sequelize.query
+  ("SELECT COUNT(*) AS nombre_livres_disponibles, SUM(CASE WHEN cover = '1' THEN 1 ELSE 0 END) AS nombre_livres_couverture, SUM(views) AS nombre_vues_totales, AVG(price) AS prix_moyen FROM books");
+  
+    return res.json(results)
+  })
+
+
+// une route pour récupérer les auteurs
+app.get('/newAuthors', async (req, res) => {
+  const [results, metadata] = await sequelize.query
+  ("SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname FROM authors INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id INNER JOIN books ON books_has_authors.books_id = books.id");
+  
+    return res.json(results)
+  })
 
 
 app.post('/addresses', async (req, res) => {

@@ -54,6 +54,8 @@ export default {
   data(){
     return {
       books : [],
+      authors : [],
+      books_has_authors : [],
     }
   },
   methods: {
@@ -65,6 +67,7 @@ export default {
     const resbooks = await axios.get(`http://localhost:3000/newbooks`);
     this.books = resbooks.data
   }
+  
 
 }
 </script>
