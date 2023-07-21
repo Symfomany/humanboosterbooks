@@ -53,8 +53,25 @@ app.get("/nb_editors", async (req, res) => {
   return res.json(results);
 });
 
+app.get("/nb_author", async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT COUNT(AUTHORS.id) AS nb_author FROM authors;");
+  return res.json(results);
+});
+
 app.get("/editors", async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT * FROM editors");
+
+  return res.json(results);
+});
+
+app.get("/nb_editor", async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT COUNT(editors.id) AS nb_editor FROM editors;");
+
+  return res.json(results);
+});
+
+app.get("/editors_name_nb_books", async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT editors.name, COUNT(books.id) AS nb_books FROM editors INNER JOIN editors_has_books ON editors.id = editors_has_books.editors_id INNER JOIN books ON editors_has_books.books_id = books.id GROUP BY editors.id, editors.name;");
 
   return res.json(results);
 });
