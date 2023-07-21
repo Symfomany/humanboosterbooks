@@ -1,23 +1,31 @@
 <template>
     <div>
-        <h3>Donnée des Auteurs</h3>
-       <table class="table-authors">
-        <thead class="table-dark">
-            <tr >
-                <th scope="col">Prénom</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Biographie</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="author in authors" :key="author.id">
-                <td scope="row" @click="sendIdAuthors(author.id)" > {{ author.firstname }} </td>
-                <td scope="row"> {{ author.lastname }} </td>
-                <td scope="row"> {{ author.biography }} </td>
-            </tr>
-        </tbody>
-       </table>
-       <h4 v-for="titleAuthors in titleBook"> {{ titleAuthors.title }} {{ titleAuthors.firstname }} {{ titleAuthors.lastname }}</h4>
+        <div class="authors">
+            <h3>Donnée des Auteurs</h3>
+            <table class="table-authors">
+                <thead class="table-dark">
+                    <tr >
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Biographie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="author in authors" :key="author.id">
+                        <td scope="row" @click="sendIdAuthors(author.id)" > {{ author.firstname }} </td>
+                        <td scope="row" @click="sendIdAuthors(author.id)" > {{ author.lastname }} </td>
+                        <td scope="row" @click="sendIdAuthors(author.id)" > {{ author.biography }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <input type="text" v-model="newAuthor.firstname">
+            <input type="text" v-model="newAuthor.lastname">
+            <input type="text" v-model="newAuthor.biography">
+            <input type="text" v-model="newAuthor.prize">
+            <button type="button" @click="addAuthors">Envoyer</button>
+        </div>
     </div>
 </template>
 
@@ -33,13 +41,35 @@ export default {
       return {
         authors: [],
         editors: [],
-        titleBook: []
+
+        newAuthor: {
+            firstname:"",
+            lastname:"",
+            biography:"",
+            prize:"",
+        },
       }
     },
     methods: {
     sendIdAuthors(id){
         // ROUTER naviguation
         this.$router.push({ name: 'Details', params: { id: id } })
+      },
+
+      //Ajout Auteurs
+      async addAuthors(){
+        const newAuthor = await axios.post('http://localhost:3000/authors' , {
+            newAuthor: this.newAuthor,
+        });
+        const authorData = await axios.get(`http://localhost:3000/authors`);
+      this.authors = authorData.data
+
+        this.newAuthor = {
+            firstname:"",
+            lastname:"",
+            biography:"",
+            prize:"",
+        }
       }
     },  
     async created(){
@@ -47,10 +77,7 @@ export default {
       //Les Auteurs
       const authorData = await axios.get(`http://localhost:3000/authors`);
       this.authors = authorData.data
-
-      //Titre Livre plus nom auteurs
-      const titleLastFirstNameAuthorsData = await axios.get('http://localhost:3000/title-books')
-      this.titleBook = titleLastFirstNameAuthorsData.data
+    
     }
   }
 

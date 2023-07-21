@@ -1,6 +1,11 @@
 <template>
     <div>
-        <p>{{ detailAuthor.firstname }}</p>
+        <h3>{{ detailAuthor.firstname }} {{ detailAuthor.lastname }}</h3>
+        <img :src="detailAuthor.image" :alt="detailAuthor.firstname">
+        <ul>
+          <li>{{ detailAuthor.title }}</li>
+        </ul>
+        <p>{{ detailAuthor.biography }}</p>
     </div>
 </template>
 
@@ -14,6 +19,7 @@
     data(){
       return {
         detailAuthor: [],
+
       }
     },
     methods: {
@@ -29,6 +35,8 @@
         id: id
        })
        this.detailAuthor = auteurData.data[0]
+
+
     }
   }
 </script>
