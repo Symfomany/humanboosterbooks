@@ -66,6 +66,23 @@ app.get("/orders/stats", async (req, res) => {
 })
 app.post
 
+app.post("/orders/:id", async (req, res) => {
+
+  const status = req.body.status
+
+  if (req.params.id>0 && (status =="en cours" || status == "livré" || status == "non livré" || status == "traité")){
+    const id = parseInt(req.params.id)
+    await sequelize.query(
+    `UPDATE orders SET status = ${status} WHERE orders.id = ${id}`
+    )
+    res = "success"
+  }
+  else {
+    res = "error, invalid url or parameters"
+  }
+
+})
+
 // Route en POST
 
 app.listen(port, () => {
