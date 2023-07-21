@@ -76,7 +76,6 @@
 
 
         
-        <p>{{ tusers[0].id }}</p>
         <table class="table table-striped table-dark">
           <thead>
             <tr>
@@ -136,6 +135,7 @@
     data(){
       return {
         users: [],
+        tusers: [],
         fname: "",
         lname: "",
         age:"",
@@ -144,6 +144,7 @@
         dob: "",
         lang:"",
         phone:""
+      
       }
     },
   
