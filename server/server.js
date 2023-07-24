@@ -88,6 +88,29 @@ app.post("/orders/:id", async (req, res) => {
   return res.json(result);
 });
 
+//une route pour les commentaires
+app.get("/comments", async (req, res) => {
+  const limit = req.query.limit > 0 ? parseInt(req.query.limit) : 10;
+  const sortBy = "id";
+  const[results, metadata] = await sequelize.query(
+      `SELECT c.*, u.lastname, u.firstname, b.title FROM comments c JOIN users u ON c.users_id = u.id JOIN books b ON c.books_id = b.id ORDER BY ${sortBy} Desc LIMIT ${limit}`);
+  const[count] = await sequelize.query(
+      `SELECT COUNT(id) AS nbCount FROM comments`
+  );
+  res.json({results,count});
+    });
+
+//route pour delete les commentaires
+app.post('/delete-comments', async (req, res) => {
+
+  let delete_comments = req.body.id
+
+  const [results, metadata] = await sequelize.query (
+      `DELETE FROM comments WHERE id = ${delete_comments}`
+  );
+  return res.json({success : true});
+});
+
 // Route en POST
 
 app.listen(port, () => {
