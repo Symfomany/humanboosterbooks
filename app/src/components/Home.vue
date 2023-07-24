@@ -65,11 +65,12 @@
               </div>
             </div>
 
-        <div class="col-md-6 col-lg-3">
-          <div class="card">
+        <div class="col-md-12 col-lg-6">
+          <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title">  Modérer les Commentaires</h5>
-              <p class="card-text">Description du contenu de la carte 1.</p>
+              <h5 class="card-title">Modérer les Commentaires</h5>
+              <p>Nombre de commentaires : {{ commentCount }}</p>
+              <Comments @decrementCount="commentCount--"></Comments>
             </div>
           </div>
         </div>
@@ -114,6 +115,7 @@ import HumanBooster from './HumanBooster.vue'
 import LastOrders from './last-orders.vue'
 import OrdersStats from './orders-stats.vue';
 import ModifyOrder from './modify-order.vue';
+import Comments from './comments.vue';
 export default {
   name: 'Home',
   props: {},
@@ -121,7 +123,8 @@ export default {
     HumanBooster,
     LastOrders,
     OrdersStats,
-    ModifyOrder
+    ModifyOrder,
+    Comments
   },
   data(){
     return {
@@ -130,7 +133,8 @@ export default {
       prenom: "Julien",
       addresses : [],
       links: [],
-      compteur: 0
+      compteur: 0,
+      commentCount: '',
     }
   },
   methods: {
@@ -161,6 +165,9 @@ export default {
     // je charge les liens derriere API
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
+
+    const resCount = await axios.get(`http://localhost:3000/comments`);
+    this.commentCount = resCount.data.count[0].nbCount
   }
 
 }
