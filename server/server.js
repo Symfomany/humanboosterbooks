@@ -100,7 +100,7 @@ app.post('/users', async (req, res) => {
 
 
   const [results, metadata] = await sequelize.query(`
-    INSERT INTO users (firstname, lastname, age, email, password, profile_id) VALUES ("${fname}", "${lname}", "${age}", "${email}", "${pswd}", "${pid}")
+    INSERT INTO users (firstname, lastname, age, email, password, profile_id, enable, date_auth, date_created) VALUES ("${fname}", "${lname}", "${age}", "${email}", "${pswd}", "${pid}", "0", "2023-06-28T00:00:00.000Z", "2023-06-07T00:00:00.000Z")
   `);
 
   res.json(results)
