@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../components/Home.vue";
+import Editors from "../components/Editors.vue";
 import Authors from "../components/Authors.vue";
 import Details from "../components/Details.vue";
 
@@ -16,6 +17,11 @@ const routes = [
     path: "/about",
     name: "about",
     component: () => import(/* static page*/ "../views/AboutView.vue"),
+  },
+  {
+    path: "/editors",
+    name: "editors",
+    component: Editors,
   },
   {
     path: "/authors",

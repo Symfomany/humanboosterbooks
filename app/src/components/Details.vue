@@ -1,12 +1,17 @@
 <template>
   <div>
+    <div v-if="detailAuthor.id">
       <h3>{{ detailAuthor.firstname }} {{ detailAuthor.lastname }}</h3>
       <img :src="detailAuthor.image" :alt="detailAuthor.firstname">
       <ul>
         <li>{{ detailAuthor.title }}</li>
       </ul>
       <p>{{ detailAuthor.biography }}</p>
+
+    
+    </div>
   </div>
+  
 </template>
 
 <script>

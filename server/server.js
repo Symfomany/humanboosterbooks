@@ -92,6 +92,12 @@ app.post("/addresses", async (req, res) => {
   res.json(results);
 });
 
+app.get("/editors_name_nb_books", async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT editors.name, COUNT(books.id) AS nb_books FROM editors INNER JOIN editors_has_books ON editors.id = editors_has_books.editors_id INNER JOIN books ON editors_has_books.books_id = books.id GROUP BY editors.id, editors.name;");
+
+  return res.json(results);
+});
+
 // Route en POST
 
 app.listen(port, () => {
