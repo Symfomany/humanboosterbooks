@@ -85,7 +85,7 @@
 
 
         
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark cus-margin">
           <thead>
             <tr>
               <th scope="col">id</th>
@@ -247,10 +247,16 @@
     await this.tableUsers()
     await this.countEnable()
   },
-
-
-
   
 }
 
 </script>
+
+
+<style>
+
+  .cus-margin {
+    margin-left: -170px;
+  }
+
+</style>
