@@ -129,19 +129,19 @@ app.delete('/users/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la suppression de l\'utilisateur' });
   }
-});
+})
 
-app.post('/users/:id', async (req, res) => {
+app.post('/users/enable/:id', async (req, res) => {
   const userActivId = req.params.id;
   const activateButton = await sequelize.query(`
-    UPDATE users SET enable = "1" WHERE users.id = ${userActivId}
+    UPDATE users SET enable = 1 WHERE users.id = ${userActivId}
   `);
 })
 
-app.post('/users/:id', async (req, res) => {
+app.post('/users/disable/:id', async (req, res) => {
   const userUnactivId = req.params.id;
   const unactivateButton = await sequelize.query(`
-    UPDATE users SET enable = "0" WHERE users.id = ${userUnactivId}
+    UPDATE users SET enable = 0 WHERE users.id = ${userUnactivId}
   `);
 })
 

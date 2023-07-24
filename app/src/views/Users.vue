@@ -98,7 +98,9 @@
               <th scope="col">Pf</th>
               <th scope="col">Date d'authentification</th>
               <th scope="col">Date de création</th>
-              <th scope="col">Suppression</th>
+              <th scope="col">Supprimer</th>
+              <th scope="col">Activer</th>
+              <th scope="col">Désactiver</th>
             </tr>
           </thead>
           <tbody>
@@ -109,11 +111,13 @@
               <td>{{ users.email }}</td>
               <td>{{ users.password }}</td>
               <td>{{ users.age }}</td>
-              <td>{{ users.enable }}<button @click="activateButton(users.id)" class="btn btn-dark">Activer</button><button @click="unactivateButton(users.id)" class="btn btn-dark">Désactiver</button></td>
+              <td>{{ users.enable }}</td>
               <td>{{ users.profile_id }}</td>
               <td>{{ users.date_auth }}</td>
               <td>{{ users.date_created }}</td>
               <td><button @click="deleteUser(users.id)" class="btn btn-danger">Supprimer</button></td>
+              <td><button @click="activateButton(users.id)" class="btn btn-dark">+</button></td>
+              <td><button @click="unactivateButton(users.id)" class="btn btn-dark">-</button></td>
             </tr>
           </tbody>
         </table>
@@ -231,11 +235,11 @@
   },
 
   async activateButton(userActivId) {
-    await axios.post(`http://localhost:3000/users/${userActivId}`);
+    await axios.post(`http://localhost:3000/users/enable/${userActivId}`);
   },
 
   async unactivateButton(userUnactivId) {
-    await axios.post(`http://localhost:3000/users/${userUnactivId}`);
+    await axios.post(`http://localhost:3000/users/disable/${userUnactivId}`);
   }
 },
 
