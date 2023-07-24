@@ -94,7 +94,6 @@ export default {
     },
     data() {
         return {
-            authors: [],
             editors: [],
             editors_all_data: [],
             nb_editor: '',
