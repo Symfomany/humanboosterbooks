@@ -111,6 +111,19 @@ app.get('/newAuthors', async (req, res) => {
   res.json(results)
 })
 
+ // une route pour modifier la disponibilité d'un livre
+
+ app.post('/isavailable', async (req, res) => {
+  
+  let bookid = req.body.bookid
+
+  const [results, metadata] = await sequelize.query(`
+  UPDATE books SET disponibility = !disponibility WHERE books.id = ${bookid}; 
+  `);
+
+  res.json(results)
+})
+
 app.post('/addresses', async (req, res) => {
   
   let zipcode = req.body.zipcode

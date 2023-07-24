@@ -27,7 +27,9 @@
                             <div>
                                 <p v-if="book.disponibility === 1"> Disponible </p>
                                 <p v-else> Non disponible </p>
+                                <button class="btn btn-danger" @click="modifyDisponibility(book.id)">Modifier la disponibilité</button>
                             </div>
+                            
                         </div>
 
                         <div class="infos_books">    
@@ -94,17 +96,27 @@ export default {
 
     }
   },
-  methods: {
-   async modifyVisibility(id){
-        await axios.post(`http://localhost:3000/isvisible`, {
-            bookid: id
-        });
 
-        const resbooks = await axios.get(`http://localhost:3000/newbooks`);
-        this.books = resbooks.data
 
-    }
-  },  
+methods: {
+  async modifyVisibility(id) {
+    await axios.post(`http://localhost:3000/isvisible`, {
+      bookid: id
+    });
+
+    const resbooks = await axios.get(`http://localhost:3000/newbooks`);
+    this.books = resbooks.data;
+  },
+  async modifyDisponibility(id) {
+    await axios.post(`http://localhost:3000/isavailable`, {
+      bookid: id
+    });
+
+    const resbooks = await axios.get(`http://localhost:3000/newbooks`);
+    this.books = resbooks.data;
+  }
+},
+
   async created(){
 
 // je charge les liens derriere API
