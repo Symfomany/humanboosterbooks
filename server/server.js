@@ -42,6 +42,12 @@ app.get("/authors", async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT * FROM authors");
   return res.json(results);
 });
+app.delete("/authors/:id", async (req, res) => {
+  const id = req.params.id;
+  const [results, metadata] = await sequelize.query(
+    `DELETE FROM authors WHERE authors.id = ${id}`
+  );
+});
 
 app.post("/detail-auteur", async (req, res) => {
   let id = req.body.id;
@@ -58,6 +64,13 @@ app.post("/detail-auteur", async (req, res) => {
 app.get("/nb_author", async (req, res) => {
   const [results, metadata] = await sequelize.query(
     "SELECT COUNT(AUTHORS.id) AS nb_author FROM authors;"
+  );
+  return res.json(results);
+});
+app.post("/authors", async (req, res) => {
+  const author = req.body.newAuthor;
+  const [results, metadata] = await sequelize.query(
+    `INSERT INTO authors (firstname, lastname, biography) VALUES ("${author.firstname}", "${author.lastname}", "${author.biography}")`
   );
   return res.json(results);
 });

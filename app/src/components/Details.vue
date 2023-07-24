@@ -19,7 +19,6 @@
   data(){
     return {
       detailAuthor: [],
-
     }
   },
   methods: {
@@ -34,9 +33,8 @@
      const auteurData = await axios.post('http://localhost:3000/detail-auteur', {
       id: id
      })
-     this.detailAuthor = auteurData.data[0]
-
-
+     this.detailAuthor = auteurData.data[0];
   }
 }
+
 </script>
