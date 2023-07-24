@@ -33,7 +33,7 @@
     <nav>
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link>  |
-        <router-link to="/authors">Authors</router-link>
+        <router-link to="/editors">Editors</router-link>
       </nav>
     <main class="container" id="main">
        <router-view/>

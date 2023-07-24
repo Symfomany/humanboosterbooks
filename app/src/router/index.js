@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../components/Home.vue";
-import Authors from "../components/Authors.vue";
+import Editors from "../components/Editors.vue";
 
 Vue.use(VueRouter);
 
@@ -17,9 +17,9 @@ const routes = [
     component: () => import(/* static page*/ "../views/AboutView.vue"),
   },
   {
-    path: "/authors",
-    name: "authors",
-    component: Authors,
+    path: "/editors",
+    name: "editors",
+    component: Editors,
   },
 ];
 

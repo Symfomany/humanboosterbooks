@@ -113,7 +113,7 @@
 <script>
 import axios from 'axios';
 import HumanBooster from './HumanBooster.vue';
-import Authors from './Authors.vue';
+import Editors from './Editors.vue';
 
 
 export default {
@@ -121,7 +121,7 @@ export default {
   props: {},
   components: {
     HumanBooster,
-    Authors
+    Editors
   },
   data(){
     return {
@@ -130,7 +130,6 @@ export default {
       prenom: "Julien",
       addresses : [],
       links: [],
-      authors: [],
       editors: [],
       compteur: 0,
       currentComponent: false
@@ -166,9 +165,6 @@ export default {
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
 
-    //Les Auteurs
-    const authorData = await axios.get(`http://localhost:3000/authors`);
-    this.authors = authorData.data
   }
   
 
