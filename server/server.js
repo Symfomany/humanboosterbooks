@@ -35,6 +35,7 @@ app.get("/addresses", async (req, res) => {
 app.get("/links", async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT * FROM links");
 
+
   return res.json(results);
 });
 
@@ -91,6 +92,25 @@ app.get("/editors", async (req, res) => {
 app.post("/addresses", async (req, res) => {
   let zipcode = req.body.zipcode;
   let city = req.body.city;
+  return res.json(results)
+})
+
+
+
+// une route pour récupérer la vidéo
+app.get('/ma-video', async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT video, title FROM videos WHERE id = 1");
+
+  return res.json(results[0])
+})
+
+
+
+
+app.post('/addresses', async (req, res) => {
+  
+  let zipcode = req.body.zipcode
+  let city =  req.body.city
 
   const [results, metadata] = await sequelize.query(`
     INSERT INTO addresses (zipcode, city) VALUES ("${zipcode}", "${city}")

@@ -40,7 +40,7 @@
        <router-view/>
     </main>
 
-    <!-- Footer -->
+    <!-- Groupe 1 -->
     <footer class="bg-dark text-light text-center py-3">
       <div class="container">
         <div class="row">

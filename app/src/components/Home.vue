@@ -1,9 +1,29 @@
 <template>
   <div class="hello">
     <img src="https://campusnumerique.auvergnerhonealpes.fr/app/uploads/2019/11/logo_degrade_jaune-Baseline-300ppi.jpg" alt="">
+    
+    
+    <div class="row">
+            <div class="card">
+              <div class="card-body">
+                  <p>Video :</p>
+                  
+                  <h3>Titre: {{  titreVideo }}</h3>
+
+                  <p>{{ urlVideo }}</p>
+                <video controls width="250">
+                    <source :src="urlVideo" type="video/mp4">
+                </video>
+
+              </div>
+            </div>
+        </div>
+
     <div class="container text-center">
     <div class="row align-items-start">
       
+  
+
       <!-- Vous pouvez supprimer cet exemple -->
       <div class="row">
         <div class="card">
@@ -12,7 +32,7 @@
             <h3 class="pa-2">Compteur: {{ compteur }}</h3>
             <p>{{  prenom }}</p>
           
-            <p v-if="compteur >= 10"> Whaaaouhh ! </p>
+            <div v-if="compteur >= 10"> Whaaaouhh ! </div>
             <p v-else-if="compteur > 2"> Super ! </p>
             <p v-else> Pas encore </p>
 
@@ -26,19 +46,18 @@
         </div>
       </div>
 
-       <div class="row">
+      <div class="row">
          <div class="col-md-6 col-lg-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">  Les Adresses</h5>
                 <p class="card-text">
 
-                  <div v-if="!addresses.length" class="alert alert-info" role="alert">
-                    Chargement...
-                  </div>
-                    <p v-for="addresse in addresses" :key="addresse.id"> 
-                    <i class="fas fa-list-item"></i>
-                    {{ addresse.city }}  {{ addresse.zipcode }}</p>
+                   
+                  <p v-for="addresse in addresses" :key="addresse.id"> 
+                      <i class="fas fa-list-item"></i>
+                      {{ addresse.city }}  {{ addresse.zipcode }}
+                  </p>
 
                     <input placeholder="Zipcode" type="text" class="form-control" v-model="zipcode">
                     <input placeholder="City" type="text" class="form-control" v-model="city" >
@@ -103,6 +122,8 @@
       </div>
 
       
+
+      
       
     
     </div>
@@ -127,6 +148,8 @@ export default {
     return {
       zipcode: "",
       city: "",
+      titreVideo: "",
+      urlVideo: "",
       prenom: "Julien",
       addresses : [],
       links: [],
