@@ -56,7 +56,7 @@ app.get('/ma-video', async (req, res) => {
 // une route pour récupérer les livres
 app.get('/newbooks', async (req, res) => {
 const [results, metadata] = await sequelize.query
-(`SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname , books.*, images.image , editions.name 
+(`SELECT CONCAT(authors.firstname, ' ', authors.lastname) AS author_fullname , books.*, images.image , editions.name , CONCAT(collection.name) AS collection_books
 FROM authors 
 
 INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id 
@@ -67,6 +67,7 @@ INNER JOIN images ON books.images_id = images.id
 INNER JOIN editions_has_books ON books.id = editions_has_books.books_id 
 INNER JOIN editions ON editions_has_books.editions_id = editions.id 
 
+INNER JOIN collection ON collection.id = books.collection_id
 
 WHERE visible = 1
 
@@ -88,7 +89,16 @@ app.get('/stats', async (req, res) => {
     return res.json(results)
   })
 
+  // une route pour récupérer les collections
+app.get('/collec', async (req, res) => {
+  const [results, metadata] = await sequelize.query
+  (`SELECT * 
+  FROM collection
+  WHERE enable = '1'`);
   
+    return res.json(results)
+  })
+
 
 
 // une route pour récupérer les auteurs et le détail des livres (je peux appeler books.* parce que j'ai fait la jointure à la suite)

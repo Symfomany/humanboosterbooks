@@ -11,6 +11,16 @@
             <p>Nb de vues: {{  statsViews }}</p>
         </div>
         
+        <!-- <div v-for="collection in tableau_collection" :key="collection.id">
+            <div>
+                <p>La collection : {{collection.collection_books}}</p>
+                <p v-if="collection.enable === 1"> Disponible </p>
+                        <p v-else> Non disponible </p>
+            </div>
+        </div> -->
+
+     
+        
         
         <div >
             <div v-for="book in books" :key="books.id" class = "card custom-card ">
@@ -20,6 +30,7 @@
                     <p v-if="book.disponibility === 1"> Disponible </p>
                     <p v-else> Non disponible </p>
                     <p class="price"> {{book.price}} €</p>
+                    <p class="price"> Nom de la collection : {{ book.collection_books }} </p>
                     <img :src="book.image" />
 
                 </div>
@@ -62,6 +73,8 @@ import axios from 'axios';
 
 
 export default {
+  watch: {
+  },
   name: 'Books',
   data(){
     return {
@@ -73,6 +86,9 @@ export default {
       statsViews: "",
       statsPrice: "",
       imagecover : [],
+      tableau_collection: [],
+      
+
 
     }
   },
@@ -90,6 +106,13 @@ export default {
     this.statsCover = resStats.data[0].nombre_livres_couverture
     this.statsViews = resStats.data[0].nombre_vues_totales
     this.statsPrice = resStats.data[0].prix_moyen
+
+    // je charge les liens derriere API
+    const rescollection = await axios.get(`http://localhost:3000/collec`);
+    this.tableau_collection = rescollection.data
+
+
+
 
   }
 
