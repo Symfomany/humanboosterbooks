@@ -45,7 +45,6 @@ app.get('/links', async (req, res) => {
 })
 
 
-
 // une route pour récupérer la vidéo
 app.get('/ma-video', async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT video, title FROM videos WHERE id = 1");

@@ -6,7 +6,7 @@
         </div>
 
         <div>
-            <p>Nb de couvetures: {{  statsCover }}</p>
+            <p>Nb de couvertures: {{  statsCover }}</p>
             <p>Prix moyen: {{  statsPrice }}</p>
             <p>Nb de vues: {{  statsViews }}</p>
         </div>
