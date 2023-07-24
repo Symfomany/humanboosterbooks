@@ -76,14 +76,6 @@
 
 
 
-<!--boucle v-for pour afficher tous les utilisateurs et bouton supprimer-->
-      <div v-for="user in users" :key="user.id">
-        <p>{{ user.fname }} {{ user.lname }}</p>
-        <!-- Ajoutez un bouton pour supprimer l'utilisateur -->
-        <button @click="deleteUser(user.id)">Supprimer</button>
-      </div>
-
-
 
 
 
