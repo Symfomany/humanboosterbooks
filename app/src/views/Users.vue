@@ -64,8 +64,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
-              <td scope="col">{{ countUser.nombre_utilisateurs }}</td>
+            <tr>
+              <td v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">{{ countUser.nombre_utilisateurs }}</td>
             </tr>
           </tbody>
         </table>
