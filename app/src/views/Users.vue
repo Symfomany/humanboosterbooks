@@ -84,7 +84,7 @@
 
 
 
-        
+      <div class="d-flex justify-content-center">
         <table class="table table-striped table-dark cus-margin">
           <thead>
             <tr>
@@ -121,6 +121,8 @@
             </tr>
           </tbody>
         </table>
+      </div>  
+        
 
 
 
@@ -251,12 +253,3 @@
 }
 
 </script>
-
-
-<style>
-
-  .cus-margin {
-    margin-left: -170px;
-  }
-
-</style>
