@@ -59,8 +59,8 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nombre d'utilisateurs actifs</th>
               <th scope="col">Nombre d'utilisateurs inactifs</th>
+              <th scope="col">Nombre d'utilisateurs actifs</th>
             </tr>
           </thead>
           <tbody>
