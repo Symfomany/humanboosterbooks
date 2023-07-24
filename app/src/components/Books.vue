@@ -40,6 +40,11 @@
                             <p class="price"> {{book.price}} €</p>
                         </div>
 
+                        <div>
+                            <p> Visibilité du livre : {{ book.visible }}</p>
+                            <button class="btn btn-danger" @click="modifyVisibility(book.id)">Modifier la visibilité</button>
+                        </div>
+
                         <div class="desc">
                             <h4> Synopsis </h4>
                             <p>{{book.synopsis}} </p>
