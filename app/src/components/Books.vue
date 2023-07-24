@@ -1,5 +1,5 @@
 <template>
-     <div class="bloc_en-tete">  
+     <div class="news">  
         <div class="tete"> 
             <h2>Nos nouveautés</h2>
             {{ books.length}} books
@@ -11,8 +11,13 @@
             <p>Nb de vues : {{ statsViews }}</p>
         </div>
         
+
+
+     
+        
         
         <div>
+<<<<<<< HEAD
             <div v-for="book in books" :key="books.id" class="card custom-card">
                 
                 <div class="bloc_1_entete-card-book">
@@ -56,6 +61,24 @@
 
                             <button class="btn btn-info"  @click="modifyVisibility(book.id)">Modifier</button>
                         </div>
+=======
+            <div v-for="book in books" :key="books.id" class = "card custom-card ">
+                <img src ="{{}}" alt="">
+                <div  >
+                    <h3> {{book.title}} </h3>
+                    <p v-if="book.disponibility === 1"> Disponible </p>
+                    <p v-else> Non disponible </p>
+                    <p class="price"> {{book.price}} €</p>
+                    <img :src="book.image" />
+
+                </div>
+            
+                <div>
+                    <p> {{book.publication_date}} </p>
+                    <p> {{book.author_fullname}} </p>
+                    <p> {{book.name}} </p>
+                </div>
+>>>>>>> f21064da0bd52fd0feee4e4cad67a339987c3a16
 
                         <div class="desc">
                             <h4> Synopsis </h4>
@@ -91,6 +114,7 @@
             </div>
         </div>
     </div>
+
 </template>
 
 
@@ -100,6 +124,8 @@ import axios from 'axios';
 
 
 export default {
+  watch: {
+  },
   name: 'Books',
   data(){
     return {
@@ -111,6 +137,9 @@ export default {
       statsViews: "",
       statsPrice: "",
       imagecover : [],
+      tableau_collection: [],
+      
+
 
     }
   },
@@ -146,6 +175,13 @@ methods: {
     this.statsCover = resStats.data[0].nombre_livres_couverture
     this.statsViews = resStats.data[0].nombre_vues_totales
     this.statsPrice = resStats.data[0].prix_moyen
+
+    // je charge les liens derriere API
+    const rescollection = await axios.get(`http://localhost:3000/collec`);
+    this.tableau_collection = rescollection.data
+
+
+
 
   }
 
