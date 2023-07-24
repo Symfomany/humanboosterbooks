@@ -59,6 +59,9 @@ export default {
         console.error("Erreur lors de la suppression du commentaire :", error);
       }
     },
+    toBetterDateFormat(date) {
+      return new Date(date).toLocaleDateString();
+    },
   },
 
   data() {
@@ -67,11 +70,6 @@ export default {
   async created() {
     const { data } = await axios.get(`http://localhost:3000/comments`);
     this.comments = data.results;
-  },
-  methods: {
-    toBetterDateFormat(date) {
-      return new Date(date).toLocaleDateString();
-    },
   },
   emits: ["decrementCount"],
 };
