@@ -61,7 +61,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr is="vue:table-row" v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
+            <tr v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
               <td scope="col">{{ countUser.nombre_utilisateurs }}</td>
             </tr>
           </tbody>
@@ -213,12 +213,19 @@
         console.error(error);
       }
   },
+
+  async countEnable() {
+    const usersEnabled = await axios.get(`http://localhost:3000/users`);
+    this.usersEnabled = usersEnabled.data
+  },
 },
 
   async created(){
     await this.tableUsers()
     await this.countEnable()
   },
+
+
 
   
 }
