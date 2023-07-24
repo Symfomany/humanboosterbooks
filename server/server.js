@@ -45,7 +45,6 @@ app.get('/links', async (req, res) => {
 })
 
 
-
 // une route pour récupérer la vidéo
 app.get('/ma-video', async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT video, title FROM videos WHERE id = 1");
@@ -69,7 +68,6 @@ INNER JOIN editions ON editions_has_books.editions_id = editions.id
 
 INNER JOIN collection ON collection.id = books.collection_id
 
-WHERE visible = 1
 
 ORDER BY books.publication_date DESC 
 
@@ -112,6 +110,7 @@ app.get('/newAuthors', async (req, res) => {
     return res.json(results)
   })
 
+ 
 
 app.post('/addresses', async (req, res) => {
   

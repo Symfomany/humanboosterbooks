@@ -1,28 +1,22 @@
 <template>
-    <div class="news">  
+     <div class="news">  
         <div class="tete"> 
             <h2>Nos nouveautés</h2>
             {{ books.length}} books
         </div>
 
         <div>
-            <p>Nb de couvetures: {{  statsCover }}</p>
-            <p>Prix moyen: {{  statsPrice }}</p>
-            <p>Nb de vues: {{  statsViews }}</p>
+            <p>Nb de couvertures : {{ statsCover }}</p>
+            <p>Prix moyen : {{ statsPrice }} €</p>
+            <p>Nb de vues : {{ statsViews }}</p>
         </div>
         
-        <!-- <div v-for="collection in tableau_collection" :key="collection.id">
-            <div>
-                <p>La collection : {{collection.collection_books}}</p>
-                <p v-if="collection.enable === 1"> Disponible </p>
-                        <p v-else> Non disponible </p>
-            </div>
-        </div> -->
+
 
      
         
         
-        <div >
+        <div>
             <div v-for="book in books" :key="books.id" class = "card custom-card ">
                 <img src ="{{}}" alt="">
                 <div  >
@@ -30,7 +24,6 @@
                     <p v-if="book.disponibility === 1"> Disponible </p>
                     <p v-else> Non disponible </p>
                     <p class="price"> {{book.price}} €</p>
-                    <p class="price"> Nom de la collection : {{ book.collection_books }} </p>
                     <img :src="book.image" />
 
                 </div>
@@ -41,18 +34,20 @@
                     <p> {{book.name}} </p>
                 </div>
 
-                <div class="desc">
-                    <p>{{book.synopsis}} </p>
-                    <p><a href>Lire la suite</a></p>
-                </div>  
+                        <div class="desc">
+                            <h4> Synopsis </h4>
+                            <p>{{book.synopsis}} </p>
+                        </div> 
+                    </div> 
+                </div> 
 
-                <div class="infos">
+                <div class="infos_supp">
                     <p>  {{book.nb_page}} pages </p>
                     <p> {{book.weight}} kg </p>
                     <p> {{book.size}} cm </p>
                 </div>
 
-                <div class="list-infos">
+                <div class="list-infos-supp">
                     <h4> Informations supplémentaires : </h4>
                     <ul>
                         <li>ISBN : {{book.isbn}} </li>
@@ -60,6 +55,8 @@
                         <li>Type : {{book.type}} </li>
                     </ul>
                 </div>
+
+                
             </div>
         </div>
     </div>
@@ -92,9 +89,27 @@ export default {
 
     }
   },
-  methods: {
-   
-  },  
+
+
+methods: {
+  async modifyVisibility(id) {
+    await axios.post(`http://localhost:3000/isvisible`, {
+      bookid: id
+    });
+
+    const resbooks = await axios.get(`http://localhost:3000/newbooks`);
+    this.books = resbooks.data;
+  },
+  async modifyDisponibility(id) {
+    await axios.post(`http://localhost:3000/isavailable`, {
+      bookid: id
+    });
+
+    const resbooks = await axios.get(`http://localhost:3000/newbooks`);
+    this.books = resbooks.data;
+  }
+},
+
   async created(){
 
 // je charge les liens derriere API
@@ -123,33 +138,77 @@ export default {
 
 
 <style>
-
-.news {
-    padding:10px;
+/* En-tête */
+.bloc_en-tete {
+    padding:10px;  
 }   
 
 .tete {
     padding-bottom : 30px;
 }
 
-.desc {
-    font-size : 14px;
-    text-align: justify;
-}  
-
-h3{
+h2{
     font-weight: bold;
 }
 
+/* Bloc 1 carte "book" - img + title +date + authors + edition + price + synopsis */
+
 .custom-card {
     border-color : gray ;
-    padding-top : 10px;
-    padding-bottom : 10px; 
+    padding-top : 30px;
+    
     padding-right : 25px;
     padding-left : 25px;
 }
 
-.infos{
+.bloc_1_entete-card-book {
+    display: flex ;
+    flex-direction : row;
+}
+
+.imgecover{
+    width : 257px;
+    height : auto;
+    padding-bottom : 15px;
+}
+
+.bl_1_txtentete{
+    text-align : left;
+    padding-left : 30px;
+    display : flex; 
+    flex-direction : row;
+}
+
+.bl_1_txtentete h3{
+    font-weight: bold;
+}
+
+.infos_books{
+    text-align : left;
+    padding-left : 30px;
+    padding-top : 10px;
+    font-size : 13px;
+}
+
+.price{
+    font-size : 20px; 
+    font-weight: bold;
+}
+
+.btn-info{
+    background-color : #5D97E6;
+    
+}
+
+.desc {
+    font-size : 14px;
+    text-align: justify;
+    padding-left : 30px;
+}  
+
+/* Bloc 2 carte "book" - infos supp + liste à puce */
+
+.infos_supp{
     display : flex; 
     flex-direction : row;
     justify-content : center;
@@ -160,13 +219,9 @@ h3{
     font-weight: bold;
 }
 
-.price{
-    font-size : 20px; 
-    font-weight: bold;
-}
-
-.list-infos{
+.list-infos-supp{
     text-align: start;
     padding-top : 10px;
 }
+
 </style>
