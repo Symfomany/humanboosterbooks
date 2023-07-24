@@ -1,7 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../components/Home.vue";
+<<<<<<< HEAD
 import Editors from "../components/Editors.vue";
+=======
+import Authors from "../components/Authors.vue";
+import Details from "../components/Details.vue";
+>>>>>>> acc36252e449f16bcd1fba8443a33c987cafbee9
 
 Vue.use(VueRouter);
 
@@ -20,6 +25,11 @@ const routes = [
     path: "/editors",
     name: "editors",
     component: Editors,
+  },
+  {
+    path: "/details/:id",
+    name: "Details",
+    component: Details,
   },
 ];
 

@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const cors = require("cors");
 
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, Association } = require("sequelize");
 const { Op } = require("sequelize");
 const bodyParser = require("body-parser");
 // parse application/x-www-form-urlencoded
@@ -55,48 +55,12 @@ app.get("/editors", async (req, res) => {
   return res.json(results);
 });
 
-app.get("/nb_editor", async (req, res) => {
-  const [results, metadata] = await sequelize.query("SELECT COUNT(editors.id) AS nb_editor FROM editors;");
-
-  return res.json(results);
-});
-
-app.get("/editors_name_nb_books", async (req, res) => {
-  const [results, metadata] = await sequelize.query("SELECT editors.name, COUNT(books.id) AS nb_books FROM editors INNER JOIN editors_has_books ON editors.id = editors_has_books.editors_id INNER JOIN books ON editors_has_books.books_id = books.id GROUP BY editors.id, editors.name;");
-
-  return res.json(results);
-});
-
 app.post("/addresses", async (req, res) => {
   let zipcode = req.body.zipcode;
   let city = req.body.city;
 
   const [results, metadata] = await sequelize.query(`
     INSERT INTO addresses (zipcode, city) VALUES ("${zipcode}", "${city}")
-  `);
-
-  res.json(results);
-});
-
-// Ajouter éditeur
-app.post("/editors", async (req, res) => {
-  let logo = req.body.logo;
-  let name = req.body.name;
-
-  const [results, metadata] = await sequelize.query(`
-    INSERT INTO editors (logo, name) VALUES ("${logo}", "${name}")
-  `);
-
-  res.json(results);
-});
-
-// Supprimer éditeur
-app.post("/editors", async (req, res) => {
-  let logo = req.body.logo;
-  let name = req.body.name;
-
-  const [results, metadata] = await sequelize.query(`
-  DELETE FROM editors WHERE editors.id = editor.id
   `);
 
   res.json(results);
