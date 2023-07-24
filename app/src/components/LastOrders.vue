@@ -9,7 +9,7 @@
       >
         <p>Numero de la commande : {{ order.id }}</p>
         <p>Prix total de la commande : {{ order.price_total }}</p>
-        <p>Date de la commande : {{ order.order_date }}</p>
+        <p>Date de la commande : {{ toBetterDateFormat(order.order_date) }}</p>
         <p>Transporteur : {{ order.carrier }}</p>
         <p>Prix hors taxe : {{ order.price_ht }}</p>
         <p>Tva : {{ order.tva }}</p>
@@ -32,6 +32,11 @@ export default {
   async created() {
     const { data } = await axios.get(`http://localhost:3000/orders`);
     this.orders = data;
+  },
+  methods: {
+    toBetterDateFormat(date) {
+      return new Date(date).toLocaleDateString();
+    },
   },
 };
 </script>
