@@ -1,29 +1,9 @@
 <template>
   <div class="hello">
     <img src="https://campusnumerique.auvergnerhonealpes.fr/app/uploads/2019/11/logo_degrade_jaune-Baseline-300ppi.jpg" alt="">
-    
-    
-    <div class="row">
-            <div class="card">
-              <div class="card-body">
-                  <p>Video :</p>
-                  
-                  <h3>Titre: {{  titreVideo }}</h3>
-
-                  <p>{{ urlVideo }}</p>
-                <video controls width="250">
-                    <source :src="urlVideo" type="video/mp4">
-                </video>
-
-              </div>
-            </div>
-        </div>
-
     <div class="container text-center">
     <div class="row align-items-start">
       
-  
-
       <!-- Vous pouvez supprimer cet exemple -->
       <div class="row">
         <div class="card">
@@ -32,7 +12,7 @@
             <h3 class="pa-2">Compteur: {{ compteur }}</h3>
             <p>{{  prenom }}</p>
           
-            <div v-if="compteur >= 10"> Whaaaouhh ! </div>
+            <p v-if="compteur >= 10"> Whaaaouhh ! </p>
             <p v-else-if="compteur > 2"> Super ! </p>
             <p v-else> Pas encore </p>
 
@@ -46,18 +26,19 @@
         </div>
       </div>
 
-      <div class="row">
+       <div class="row">
          <div class="col-md-6 col-lg-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">  Les Adresses</h5>
                 <p class="card-text">
 
-                   
-                  <p v-for="addresse in addresses" :key="addresse.id"> 
-                      <i class="fas fa-list-item"></i>
-                      {{ addresse.city }}  {{ addresse.zipcode }}
-                  </p>
+                  <div v-if="!addresses.length" class="alert alert-info" role="alert">
+                    Chargement...
+                  </div>
+                    <p v-for="addresse in addresses" :key="addresse.id"> 
+                    <i class="fas fa-list-item"></i>
+                    {{ addresse.city }}  {{ addresse.zipcode }}</p>
 
                     <input placeholder="Zipcode" type="text" class="form-control" v-model="zipcode">
                     <input placeholder="City" type="text" class="form-control" v-model="city" >
@@ -84,11 +65,12 @@
               </div>
             </div>
 
-        <div class="col-md-6 col-lg-3">
-          <div class="card">
+        <div class="col-md-12 col-lg-6">
+          <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title">  Modérer les Commentaires</h5>
-              <p class="card-text">Description du contenu de la carte 1.</p>
+              <h5 class="card-title">Modérer les Commentaires</h5>
+              <p>Nombre de commentaires : {{ commentCount }}</p>
+              <Comments @decrementCount="commentCount--"></Comments>
             </div>
           </div>
         </div>
@@ -117,10 +99,9 @@
           </div>
         </div>
       </div>
-
-      
-
-      
+      <LastOrders></LastOrders>
+      <OrdersStats></OrdersStats>
+      <ModifyOrder/>
       
     
     </div>
@@ -131,22 +112,29 @@
 <script>
 import axios from 'axios';
 import HumanBooster from './HumanBooster.vue'
+import LastOrders from './LastOrders.vue'
+import OrdersStats from './OrdersStats.vue';
+import ModifyOrder from './ModifyOrder.vue';
+import Comments from './Comments.vue';
 export default {
   name: 'Home',
   props: {},
   components: {
-    HumanBooster
+    HumanBooster,
+    LastOrders,
+    OrdersStats,
+    ModifyOrder,
+    Comments
   },
   data(){
     return {
       zipcode: "",
       city: "",
-      titreVideo: "",
-      urlVideo: "",
       prenom: "Julien",
       addresses : [],
       links: [],
-      compteur: 0
+      compteur: 0,
+      commentCount: '',
     }
   },
   methods: {
@@ -178,10 +166,8 @@ export default {
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
 
-     // je charge les liens derriere API
-    const resVideo = await axios.get(`http://localhost:3000/ma-video`);
-    this.urlVideo = resVideo.data.video
-    this.titreVideo =  resVideo.data.title
+    const resCount = await axios.get(`http://localhost:3000/comments`);
+    this.commentCount = resCount.data.count[0].nbCount
   }
 
 }
