@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <h1>Les Utilisateurs</h1>
 
-        <div class="row d-flex justify-content-center">
-        <form class="w-50 ">
+      <div class="row d-flex justify-content-center">
+      <form class="w-50 ">
 
             <div class="mb-3">
                 <label for="firstname" class="form-label">Prénom</label>
@@ -52,7 +52,21 @@
 
 
 
-
+        <div class="row">
+        <table class="table">
+          <thead>
+            <tr is="vue:table-row">
+              <th scope="col">Nombre d'utilisateurs actifs</th>
+              <th scope="col">Nombre d'utilisateurs inactifs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr is="vue:table-row" v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
+              <td scope="col">{{ countUser.nombre_utilisateurs }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
 
 
@@ -63,11 +77,11 @@
 
 
 <!--boucle v-for pour afficher tous les utilisateurs et bouton supprimer-->
-        <div v-for="user in users" :key="user.id">
-          <p>{{ user.fname }} {{ user.lname }}</p>
-          <!-- Ajoutez un bouton pour supprimer l'utilisateur -->
-          <button @click="deleteUser(user.id)">Supprimer</button>
-        </div>
+      <div v-for="user in users" :key="user.id">
+        <p>{{ user.fname }} {{ user.lname }}</p>
+        <!-- Ajoutez un bouton pour supprimer l'utilisateur -->
+        <button @click="deleteUser(user.id)">Supprimer</button>
+      </div>
 
 
 
@@ -222,6 +236,7 @@
 
   async created(){
     await this.tableUsers()
+    await this.countEnable()
   },
 }
 
