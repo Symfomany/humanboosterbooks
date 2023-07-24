@@ -43,28 +43,15 @@ app.get("/authors", async (req, res) => {
   return res.json(results);
 });
 
+
+app.get("/nb_author", async (req, res) => {
+  const [results, metadata] = await sequelize.query("SELECT COUNT(AUTHORS.id) AS nb_author FROM authors;");
+  return res.json(results);
+});
+
 app.get("/editors", async (req, res) => {
   const [results, metadata] = await sequelize.query("SELECT * FROM editors");
 
-  return res.json(results);
-});
-
-app.get("/title-books", async (req, res) => {
-  const [results, metadata] = await sequelize.query(
-    "SELECT books.title FROM authors INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id INNER JOIN books ON books_has_authors.books_id = books.id GROUP BY books.id ORDER BY books.publication_date ASC LIMIT 5"
-  );
-  return res.json(results);
-});
-
-app.post("/detail-auteur", async (req, res) => {
-  let id = req.body.id;
-
-  const [results, metadata] = await sequelize.query(
-    "SELECT * FROM `authors` INNER JOIN images ON images.id = authors.images_id INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id INNER JOIN books ON books_has_authors.books_id = books.id WHERE authors.id = :id",
-    {
-      replacements: { id: id },
-    }
-  );
   return res.json(results);
 });
 
@@ -77,18 +64,6 @@ app.post("/addresses", async (req, res) => {
   `);
 
   res.json(results);
-});
-
-app.post("/authors", async (req, res) => {
-  let firstname = req.body.newAuthor.firstname;
-  let lastname = req.body.newAuthor.lastname;
-  let biography = req.body.newAuthor.biography;
-  let prize = req.body.newAuthor.prize;
-
-  const [results, metadata] = await sequelize.query(
-    `INSERT INTO authors (firstname, lastname, biography, prize) VALUE ("${firstname}","${lastname}","${biography}","${prize}")`
-  );
-  return res.json(results);
 });
 
 // Route en POST
