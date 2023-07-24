@@ -43,9 +43,22 @@ app.get("/authors", async (req, res) => {
   return res.json(results);
 });
 
+app.post("/detail-auteur", async (req, res) => {
+  let id = req.body.id;
+
+  const [results, metadata] = await sequelize.query(
+    "SELECT * FROM `authors` INNER JOIN images ON images.id = authors.images_id INNER JOIN books_has_authors ON authors.id = books_has_authors.author_id INNER JOIN books ON books_has_authors.books_id = books.id WHERE authors.id = :id",
+    {
+      replacements: { id: id },
+    }
+  );
+  return res.json(results);
+});
 
 app.get("/nb_author", async (req, res) => {
-  const [results, metadata] = await sequelize.query("SELECT COUNT(AUTHORS.id) AS nb_author FROM authors;");
+  const [results, metadata] = await sequelize.query(
+    "SELECT COUNT(AUTHORS.id) AS nb_author FROM authors;"
+  );
   return res.json(results);
 });
 
