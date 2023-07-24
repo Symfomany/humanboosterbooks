@@ -13,25 +13,28 @@
         
         
         <div>
-            <div v-for="book in books" :key="books.id" class = "card custom-card ">
+            <div v-for="book in books" :key="books.id" class="card custom-card">
                 
                 <div class="bloc_1_entete-card-book">
                     <div>
-                        <img :src="book.image" class = "imgecover"/>
+                        <img :src="book.image" class="rounded imgecover"/>
                     </div>
 
                     <div>
                         <div class="bl_1_txtentete" >
                             <h3> {{book.title}} </h3>
                             
-                            <div class="btn_dispo">
-                                <p v-if="book.disponibility === 1" style="color:green"> Disponible </p>
-                                <p v-else style="color:red"> Non disponible </p>
-                                <button class="btn btn-danger" @click="modifyDisponibility(book.id)"><img src="@/assets/modif.png" alt="" style="width: 20px; height: 20px;"/></button>
-                                </button>
+                           <div class="btn_dispo">
+                               <button style="padding: 7px" class="btn" :class="book.disponibility === 1 ? 'btn-success': 'btn-danger'" @click="modifyDisponibility(book.id)">
+                                    <span v-if="book.disponibility === 1" > Disponible </span>
+                                    <span v-else> Indisponible </span>
+                                    <img v-if="book.disponibility === 1"  src="@/assets/accept.png"  alt="" style="width: 15px; height: 15px;"/>
+                                    <img v-else  src="@/assets/error.png"  alt="" style="width: 15px; height: 15px;"/>
 
+                                    </button>
+                                </button>
                             </div>
-                            
+
                         </div>
 
                         <div class="infos_books">    
@@ -45,8 +48,13 @@
                         </div>
 
                         <div class="btn_visible">
-                            <p> Visibilité du livre : {{ book.visible }}</p>
-                            <button class="btn btn-info" @click="modifyVisibility(book.id)">Modifier</button>
+                            <p> Visibilité du livre :
+                            <span class="fas fa-eye" v-if="book.visible"></span>
+                            <span class="fas fa-eye-slash" v-else></span>
+                            </p>
+
+
+                            <button class="btn btn-info"  @click="modifyVisibility(book.id)">Modifier</button>
                         </div>
 
                         <div class="desc">
@@ -56,21 +64,29 @@
                     </div> 
                 </div> 
 
-                <div class="infos_supp">
-                    <p>  {{book.nb_page}} pages </p>
-                    <p> {{book.weight}} kg </p>
-                    <p> {{book.size}} cm </p>
+                <div class="tableau">
+                    <h4>Informations supplémentaires :</h4>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Nombre de page : </td>
+                                <td>Poids : </td>
+                                <td>Taille : </td>
+                                <td>ISBN : </td>
+                                <td>Langue :</td>
+                                <td>Type : </td>
+                            </tr>
+                            <tr>
+                                <td>{{book.nb_page}} pages</td>
+                                <td>{{book.weight}} kg</td>
+                                <td>{{book.size}} cm </td>
+                                <td>{{book.isbn}} </td>
+                                <td>{{book.lang}}</td>
+                                <td>{{book.type}}  </td>
+                            </tr>
+                        </tbody> 
+                    </table>
                 </div>
-
-                <div class="list-infos-supp">
-                    <h4> Informations supplémentaires : </h4>
-                    <ul>
-                        <li>ISBN : {{book.isbn}} </li>
-                        <li>Langue : {{book.lang}} </li>
-                        <li>Type : {{book.type}} </li>
-                    </ul>
-                </div>
-
                 
             </div>
         </div>
@@ -144,7 +160,9 @@ methods: {
 .bloc_en-tete {
     padding:10px;  
 }   
-
+.btn span{
+    color: white;
+}
 .tete {
     padding-bottom : 30px;
 }
@@ -158,7 +176,6 @@ h2{
 .custom-card {
     border-color : gray ;
     padding-top : 30px;
-    
     padding-right : 25px;
     padding-left : 25px;
 }
@@ -176,6 +193,7 @@ h2{
 
 .bl_1_txtentete{
     align-items : baseline;
+    justify-content : space-between;
     padding-left : 30px;
     display : flex; 
     flex-direction : row;
@@ -192,6 +210,7 @@ h2{
     align-items : baseline;
     padding-left : 30px;
     gap : 10px;
+    font-size : 14px;
 }
 
 .btn_dispo button{
@@ -237,22 +256,20 @@ h2{
     padding-left : 30px;
 }  
 
-/* Bloc 2 carte "book" - infos supp + liste à puce */
-
-.infos_supp{
-    display : flex; 
-    flex-direction : row;
-    justify-content : center;
-    gap : 120px;
-    padding-top : 10px;
-    background-color : gray;
-    color : white; 
-    font-weight: bold;
+table, td {
+    border: 1px solid #333;
+    margin-bottom : 30px;
+    padding-left : 10px; 
+    padding-right : 10px;
+    text-align : left;
 }
 
-.list-infos-supp{
-    text-align: start;
-    padding-top : 10px;
+thead, tfoot {
+    background-color: #333;
+    color: #fff;
+}
+.tableau h4 {
+    text-align : left;
 }
 
 </style>
