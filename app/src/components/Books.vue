@@ -6,7 +6,7 @@
         </div>
 
         <div>
-            <p>Nb de couvetures : {{ statsCover }}</p>
+            <p>Nb de couvertures : {{ statsCover }}</p>
             <p>Prix moyen : {{ statsPrice }} €</p>
             <p>Nb de vues : {{ statsViews }}</p>
         </div>
@@ -40,6 +40,11 @@
                             <p class="price"> {{book.price}} €</p>
                         </div>
 
+                        <div>
+                            <p> Visibilité du livre : {{ book.visible }}</p>
+                            <button class="btn btn-danger" @click="modifyVisibility(book.id)">Modifier la visibilité</button>
+                        </div>
+
                         <div class="desc">
                             <h4> Synopsis </h4>
                             <p>{{book.synopsis}} </p>
@@ -61,6 +66,8 @@
                         <li>Type : {{book.type}} </li>
                     </ul>
                 </div>
+
+                
             </div>
         </div>
     </div>
@@ -88,7 +95,15 @@ export default {
     }
   },
   methods: {
-   
+   async modifyVisibility(id){
+        await axios.post(`http://localhost:3000/isvisible`, {
+            bookid: id
+        });
+
+        const resbooks = await axios.get(`http://localhost:3000/newbooks`);
+        this.books = resbooks.data
+
+    }
   },  
   async created(){
 
