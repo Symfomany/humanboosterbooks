@@ -129,7 +129,7 @@ h2{
 .custom-card {
     border-color : gray ;
     padding-top : 30px;
-    padding-bottom : 10px; 
+    
     padding-right : 25px;
     padding-left : 25px;
 }
@@ -142,6 +142,7 @@ h2{
 .imgecover{
     width : 257px;
     height : auto;
+    padding-bottom : 15px;
 }
 
 .bl_1_txtentete{
