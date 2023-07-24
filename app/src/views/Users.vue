@@ -163,13 +163,9 @@
 
 
   methods: {
-    async addProfiles(e){
-    e.preventDefault()
-    
-  },
 
   async addUser(e){
-    e.preventDefault()
+    e.preventDefault();
 
     const { data } = await axios.post(`http://localhost:3000/profiles`, {
       dob: this.dob,
@@ -212,12 +208,14 @@
     this.age = ""
     this.email = ""
     this.pswd = ""
-   
+    
+    const tUsers = await axios.get(`http://localhost:3000/users`);
+    this.tusers = tUsers.data
   },
     
 
     async tableUsers() {
-      const tUsers = await axios.get(`http://localhost:3000/users`);
+        const tUsers = await axios.get(`http://localhost:3000/users`);
         this.tusers = tUsers.data
       },
 
@@ -229,6 +227,9 @@
       } catch (error) {
         console.error(error);
       }
+      
+      const tUsers = await axios.get(`http://localhost:3000/users`);
+      this.tusers = tUsers.data
   },
 
   async countEnable() {
@@ -238,10 +239,24 @@
 
   async activateButton(userActivId) {
     await axios.post(`http://localhost:3000/users/enable/${userActivId}`);
+
+    const tUsers = await axios.get(`http://localhost:3000/users`);
+    this.tusers = tUsers.data;
+
+    const usersEnable = await axios.get('http://localhost:3000/status_users_count');
+    this.countUsers = usersEnable.data
+    
   },
 
   async unactivateButton(userUnactivId) {
     await axios.post(`http://localhost:3000/users/disable/${userUnactivId}`);
+
+    const tUsers = await axios.get(`http://localhost:3000/users`);
+    this.tusers = tUsers.data;
+
+    const usersEnable = await axios.get('http://localhost:3000/status_users_count');
+    this.countUsers = usersEnable.data
+    
   }
 },
 
