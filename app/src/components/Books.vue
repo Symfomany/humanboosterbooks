@@ -24,10 +24,12 @@
                         <div class="bl_1_txtentete" >
                             <h3> {{book.title}} </h3>
                             
-                            <div>
-                                <p v-if="book.disponibility === 1"> Disponible </p>
-                                <p v-else> Non disponible </p>
-                                <button class="btn btn-danger" @click="modifyDisponibility(book.id)">Modifier la disponibilité</button>
+                            <div class="btn_dispo">
+                                <p v-if="book.disponibility === 1" style="color:green"> Disponible </p>
+                                <p v-else style="color:red"> Non disponible </p>
+                                <button class="btn btn-danger" @click="modifyDisponibility(book.id)"><img src="@/assets/modif.png" alt="" style="width: 20px; height: 20px;"/></button>
+                                </button>
+
                             </div>
                             
                         </div>
@@ -173,7 +175,7 @@ h2{
 }
 
 .bl_1_txtentete{
-    text-align : left;
+    align-items : baseline;
     padding-left : 30px;
     display : flex; 
     flex-direction : row;
@@ -181,6 +183,23 @@ h2{
 
 .bl_1_txtentete h3{
     font-weight: bold;
+    text-align : left;
+}
+
+.btn_dispo{
+    display : flex ;
+    flex-direction : row;
+    align-items : baseline;
+    padding-left : 30px;
+    gap : 10px;
+}
+
+.btn_dispo button{
+    font-size : 13px;
+    padding-top : 2px;
+    padding-bottom : 2px;
+    padding-right : 5px;
+    padding-left : 5px;
 }
 
 .infos_books{
@@ -195,9 +214,21 @@ h2{
     font-weight: bold;
 }
 
+.btn_visible{
+    display : flex ;
+    flex-direction : row;
+    align-items : baseline;
+    padding-left : 30px;
+    gap : 10px;
+}
+
 .btn-info{
     background-color : #5D97E6;
-    
+    font-size : 13px;
+    padding-top : 2px;
+    padding-bottom : 2px;
+    padding-right : 5px;
+    padding-left : 5px;
 }
 
 .desc {
