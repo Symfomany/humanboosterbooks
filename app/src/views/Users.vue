@@ -52,7 +52,10 @@
 
 
 
-        <div class="row">
+
+
+
+      <div class="row">
         <table class="table">
           <thead>
             <tr is="vue:table-row">
@@ -61,15 +64,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
+            <tr is="vue:table-row" v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
               <td scope="col">{{ countUser.nombre_utilisateurs }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-
-
-
 
 
 
@@ -148,8 +148,8 @@
         pswd:"",
         dob: "",
         lang:"",
-        phone:""
-      
+        phone:"",
+        countUsers: []
       }
     },
   
@@ -226,8 +226,8 @@
   },
 
   async countEnable() {
-    const usersEnabled = await axios.get(`http://localhost:3000/users`);
-    this.usersEnabled = usersEnabled.data
+    const usersEnable = await axios.get('http://localhost:3000/status_users_count');
+    this.countUsers = usersEnable.data
   },
 },
 
