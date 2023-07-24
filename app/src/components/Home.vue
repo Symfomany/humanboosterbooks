@@ -112,10 +112,10 @@
 <script>
 import axios from 'axios';
 import HumanBooster from './HumanBooster.vue'
-import LastOrders from './last-orders.vue'
-import OrdersStats from './orders-stats.vue';
-import ModifyOrder from './modify-order.vue';
-import Comments from './comments.vue';
+import LastOrders from './LastOrders.vue'
+import OrdersStats from './OrdersStats.vue';
+import ModifyOrder from './ModifyOrder.vue';
+import Comments from './Comments.vue';
 export default {
   name: 'Home',
   props: {},

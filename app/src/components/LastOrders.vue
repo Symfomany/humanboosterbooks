@@ -7,13 +7,13 @@
         :key="index"
         class="card col-md-6 col-lg-3 mx-auto"
       >
-        <p>Numero de la commande :{{ order.id }}</p>
-        <p>Prix total de la commande :{{ order.price_total }}</p>
-        <p>Date de la commande :{{ order.order_date }}</p>
-        <p>Transporteur :{{ order.carrier }}</p>
-        <p>Prix hors taxe :{{ order.price_ht }}</p>
+        <p>Numero de la commande : {{ order.id }}</p>
+        <p>Prix total de la commande : {{ order.price_total }}</p>
+        <p>Date de la commande : {{ order.order_date }}</p>
+        <p>Transporteur : {{ order.carrier }}</p>
+        <p>Prix hors taxe : {{ order.price_ht }}</p>
         <p>Tva : {{ order.tva }}</p>
-        <p>Status de la commande :{{ order.status }}</p>
+        <p>Status de la commande : {{ order.status }}</p>
       </div>
     </div>
     <template v-else>
