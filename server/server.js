@@ -138,6 +138,13 @@ app.post('/users/:id', async (req, res) => {
   `);
 })
 
+app.post('/users/:id', async (req, res) => {
+  const userUnactivId = req.params.id;
+  const unactivateButton = await sequelize.query(`
+    UPDATE users SET enable = "0" WHERE users.id = ${userUnactivId}
+  `);
+})
+
 
 // Route en POST 
 

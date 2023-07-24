@@ -1,7 +1,6 @@
 <template>
     <div class="container-fluid">
         <h1>Les Utilisateurs</h1>
-        <h2>(Vous savez, les gens qui font n'importe quoi là)</h2>
 
       <div class="row d-flex justify-content-center">
       <form class="w-50 ">
@@ -19,7 +18,7 @@
                 <input type="date" class="form-control" id="dob" v-model="dob">
             </div>
             <div class="mb-3">
-                <label for="age" class="form-label">Age (T'es ieuv mon reuf !)</label>
+                <label for="age" class="form-label">Age</label>
                 <input type="number" class="form-control" id="age" v-model="age">
             </div>
             <div class="mb-3">
@@ -27,7 +26,7 @@
                 <input type="email" class="form-control" id="email" v-model="email">
             </div>
             <div class="mb-3">
-                <label for="phone" class="form-label">Balances ton 06</label>
+                <label for="phone" class="form-label">Numéro de téléphone</label>
                 <input type="text" class="form-control" id="phone" v-model="phone">
             </div>
             <div class="mb-3">
@@ -110,7 +109,7 @@
               <td>{{ users.email }}</td>
               <td>{{ users.password }}</td>
               <td>{{ users.age }}</td>
-              <td>{{ users.enable }}<button @click="activateButton(users.id)" class="btn btn-dark">Activé</button> </td>
+              <td>{{ users.enable }}<button @click="activateButton(users.id)" class="btn btn-dark">Activer</button><button @click="unactivateButton(users.id)" class="btn btn-dark">Désactiver</button></td>
               <td>{{ users.profile_id }}</td>
               <td>{{ users.date_auth }}</td>
               <td>{{ users.date_created }}</td>
@@ -233,6 +232,10 @@
 
   async activateButton(userActivId) {
     await axios.post(`http://localhost:3000/users/${userActivId}`);
+  },
+
+  async unactivateButton(userUnactivId) {
+    await axios.post(`http://localhost:3000/users/${userUnactivId}`);
   }
 },
 
@@ -247,9 +250,3 @@
 }
 
 </script>
-
-<style scoped>
-  * {
-    color : purple;
-  }
-</style>
