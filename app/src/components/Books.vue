@@ -40,9 +40,9 @@
                             <p class="price"> {{book.price}} €</p>
                         </div>
 
-                        <div>
+                        <div class="btn_visible">
                             <p> Visibilité du livre : {{ book.visible }}</p>
-                            <button class="btn btn-danger" @click="modifyVisibility(book.id)">Modifier la visibilité</button>
+                            <button class="btn btn-info" @click="modifyVisibility(book.id)">Modifier</button>
                         </div>
 
                         <div class="desc">
@@ -181,6 +181,11 @@ h2{
 .price{
     font-size : 20px; 
     font-weight: bold;
+}
+
+.btn-info{
+    background-color : #5D97E6;
+    
 }
 
 .desc {
