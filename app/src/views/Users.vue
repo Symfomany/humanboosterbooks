@@ -58,13 +58,13 @@
       <div class="row">
         <table class="table">
           <thead>
-            <tr is="vue:table-row">
+            <tr>
               <th scope="col">Nombre d'utilisateurs actifs</th>
               <th scope="col">Nombre d'utilisateurs inactifs</th>
             </tr>
           </thead>
           <tbody>
-            <tr is="vue:table-row" v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
+            <tr v-for="countUser in countUsers" :key="countUser.nombre_utilisateurs">
               <td scope="col">{{ countUser.nombre_utilisateurs }}</td>
             </tr>
           </tbody>
@@ -94,7 +94,7 @@
               <th scope="col">Email</th>              
               <th scope="col">Password</th>              
               <th scope="col">Age</th>
-              <th scope="col">Activé</th>
+              <th scope="col">Activé </th>
               <th scope="col">Pf</th>
               <th scope="col">Date d'authentification</th>
               <th scope="col">Date de création</th>
@@ -109,7 +109,7 @@
               <td>{{ users.email }}</td>
               <td>{{ users.password }}</td>
               <td>{{ users.age }}</td>
-              <td>{{ users.enable }}</td>
+              <td>{{ users.enable }}<button @click="activateButton(users.id)" class="btn btn-dark">Activé</button> </td>
               <td>{{ users.profile_id }}</td>
               <td>{{ users.date_auth }}</td>
               <td>{{ users.date_created }}</td>
@@ -229,6 +229,10 @@
     const usersEnable = await axios.get('http://localhost:3000/status_users_count');
     this.countUsers = usersEnable.data
   },
+
+  async activateButton(userActivId) {
+    await axios.post(`http://localhost:3000/users/${userActivId}`);
+  }
 },
 
   async created(){

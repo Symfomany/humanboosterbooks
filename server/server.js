@@ -122,7 +122,6 @@ app.post('/profiles', async (req, res) => {
 //Pouvoir supprimer un utilisateur
 app.delete('/users/:id', async (req, res) => {
   const userId = req.params.id;
-  console.log(userId);
   try {
     // Supprimer l'utilisateur en fonction de l'ID spécifié
     const deletedUser = await sequelize.query(`DELETE FROM users WHERE id = ${userId}`);
@@ -131,6 +130,13 @@ app.delete('/users/:id', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la suppression de l\'utilisateur' });
   }
 });
+
+app.post('/users/:id', async (req, res) => {
+  const userActivId = req.params.id;
+  const activateButton = await sequelize.query(`
+    UPDATE users SET enable = "1" WHERE users.id = ${userActivId}
+  `);
+})
 
 
 // Route en POST 
