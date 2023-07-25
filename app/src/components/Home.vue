@@ -113,6 +113,9 @@
             <div class="card-body">
               <h5 class="card-title">Modérer les Auteurs et Editions </h5>
               <p class="card-text">Description du contenu de la carte 4.</p>
+              <!-- MyComponent -->
+                <Authors v-if="currentComponent == true"></Authors>
+                <router-link to="/authors">Authors</router-link>
             </div>
           </div>
         </div>
@@ -130,12 +133,16 @@
 
 <script>
 import axios from 'axios';
-import HumanBooster from './HumanBooster.vue'
+import HumanBooster from './HumanBooster.vue';
+import Editors from './Editors.vue';
+
+
 export default {
   name: 'Home',
   props: {},
   components: {
-    HumanBooster
+    HumanBooster,
+    Editors
   },
   data(){
     return {
@@ -146,7 +153,9 @@ export default {
       prenom: "Julien",
       addresses : [],
       links: [],
-      compteur: 0
+      editors: [],
+      compteur: 0,
+      currentComponent: false
     }
   },
   methods: {
@@ -167,7 +176,8 @@ export default {
        this.city = ""
        this.zipcode = ""
 
-    }
+    },
+ 
   },  
   async created(){
     // je charge les adresses derriere API
@@ -178,16 +188,13 @@ export default {
     const res = await axios.get(`http://localhost:3000/links`);
     this.links = res.data
 
-     // je charge les liens derriere API
-    const resVideo = await axios.get(`http://localhost:3000/ma-video`);
-    this.urlVideo = resVideo.data.video
-    this.titreVideo =  resVideo.data.title
   }
+  
 
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
 
 </style>
